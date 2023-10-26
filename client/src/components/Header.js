@@ -38,7 +38,7 @@ export default function Header(props: Props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} stickyHeader={true}>
       <Typography variant="h6" sx={{ my: 2 }}>
         {siteName}
       </Typography>
