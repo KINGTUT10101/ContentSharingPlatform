@@ -76,11 +76,11 @@ export default function Header(props: Props) {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: {sm: 'block' } }}
           >
             {siteName}
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box sx={{ display: { sm: 'block' } }}>
             {navItems.map((item) => (
               <Link to={item.path}>
                 <Button key={item.name} sx={{ color: '#fff' }}>
@@ -101,7 +101,7 @@ export default function Header(props: Props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
