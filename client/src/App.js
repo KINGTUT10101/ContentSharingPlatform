@@ -16,13 +16,21 @@ const darkTheme = createTheme({
   },
 });
 
+let style = {
+  display: "flex",
+  minHeight: "100vh",
+  flexDirection: "column",
+  justifyContent: "space-between"
+}
+
 function App() {
   return (
     <div className="App">
+      <div style={style}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Header />
-        <Container maxWidth="sm" sx={{ pb: '2rem', wordWrap: 'break-word' }}>
+        <Container maxWidth="sm" sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
           <Routes>
             <Route path="/" element={ <Home /> } />
             <Route path="about" element={ <div> about me!!! </div> } />
@@ -31,6 +39,7 @@ function App() {
         </Container>
         <Footer />
       </ThemeProvider>
+      </div>
     </div>
   )
 }
