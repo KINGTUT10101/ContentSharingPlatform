@@ -12,6 +12,10 @@ Make sure [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-np
 
 Run “npm install”
 
+Run “cd client”
+
+Run "npm install" again
+
 ## Running the project
 
 Run “npm run dev” in the project's root directory
