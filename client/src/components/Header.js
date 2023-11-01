@@ -24,7 +24,7 @@ interface Props {
 }
 
 const drawerWidth = 240;
-const siteName = "JASG"
+const siteName = "CSP"
 const navItems = [
   {name: 'Home', path: '/'}, {name: 'Browse', path: '/browse'}, {name: 'Profile', path: '/profile'}
 ]

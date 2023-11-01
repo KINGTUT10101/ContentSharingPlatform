@@ -9,6 +9,7 @@ import Footer from "./components/Footer"
 
 // Pages
 import Home from "./pages/Home"
+import Profile from "./pages/Profile"
 
 const darkTheme = createTheme({
   palette: {
@@ -33,7 +34,7 @@ function App() {
         <Container sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
           <Routes>
             <Route path="/" element={ <Home /> } />
-            <Route path="about" element={ <div> about me!!! </div> } />
+            <Route path="profile" element={ <Profile /> } />
             <Route path="contact" element={ <div> here are my contacts </div> } />
           </Routes>
         </Container>
