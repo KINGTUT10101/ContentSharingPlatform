@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 const PORT = process.env.PORT || 5000;
-
+const app = express()
 let corsOptions = {
   origin: `http://localhost:{PORT}`
 };
@@ -11,8 +11,6 @@ let corsOptions = {
 app.use(cors(corsOptions))
 app.use(express.urlencoded({ extended: true }))
 dotenv.config({ path: './config/config.env' })
-
-const app = express();
 
 app.get('/', (req, res) => res.send('Server running'));
 
