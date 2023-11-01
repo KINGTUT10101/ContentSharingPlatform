@@ -3,6 +3,10 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import RatingBar from "./RatingBar"
 
+/**
+ * Shows a user's profile data, including their name, PFP, bio, and average content rating
+ * @returns {JSX.Element} A ProfileCard component.
+ */
 export default function ProfileCard () {
   const theme = useTheme()
   let flexDirection = useMediaQuery(theme.breakpoints.down('sm')) ? "column" : "row"

@@ -1,6 +1,10 @@
 import ContentCard from "../components/ContentCard"
 import { Grid } from "@mui/material"
 
+/**
+ * The main page of the website. Shows recent announcements and featured content
+ * @returns {JSX.Element} A Home component.
+ */
 export default function Home() {
   return (
     <div>

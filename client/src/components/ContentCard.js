@@ -3,6 +3,12 @@ import DownloadIcon from '@mui/icons-material/Download';
 import RatingBar from "./RatingBar"
 import { Link } from 'react-router-dom'
 
+/**
+ * Displays a content's data, including the thumbnail, rating, title, author, etc
+ * @param {Object} props
+ * @param {Object} props.content Contains all the content's data
+ * @returns {JSX.Element} A ContentCard component.
+ */
 export default function ContentCard ({ content }) {
   return (
     <div style={{overflow: "hidden"}}>
