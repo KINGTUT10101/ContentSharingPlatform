@@ -30,7 +30,7 @@ function App() {
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Header />
-        <Container maxWidth="sm" sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
+        <Container sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
           <Routes>
             <Route path="/" element={ <Home /> } />
             <Route path="about" element={ <div> about me!!! </div> } />
