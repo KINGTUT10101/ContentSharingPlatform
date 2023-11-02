@@ -22,6 +22,9 @@ export default function ProfileCard () {
               style={{width: "180px", height: "180px"}}
             />
             <RatingBar fontSize="1.5rem" />
+            <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
+              Member since: 23 March 2023
+            </Typography>
           </div>
 
           <div>
