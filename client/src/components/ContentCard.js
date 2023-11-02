@@ -22,11 +22,13 @@ export default function ContentCard ({ content }) {
               opacity: 0.80, // Reduce opacity of the image on hover
             }
           }}>
-          <img
-            src="https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
-            alt="Content Thumbnail"
-            style={{width: "100%", height: "10rem", transition: 'opacity 0.3s'}}
-          />
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <img
+              src="https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+              alt="Content Thumbnail"
+              style={{width: "100%", height: "9rem", transition: 'opacity 0.3s'}}
+            />
+          </div>
 
           <Box paddingX={1}>
             <RatingBar />
