@@ -10,6 +10,7 @@ import Footer from "./components/Footer"
 // Pages
 import Home from "./pages/Home"
 import Profile from "./pages/Profile"
+import ContentPage from "./pages/ContentPage"
 
 const darkTheme = createTheme({
   palette: {
@@ -35,7 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={ <Home /> } />
             <Route path="profile" element={ <Profile /> } />
-            <Route path="contact" element={ <div> here are my contacts </div> } />
+            <Route path="content" element={ <ContentPage /> } />
           </Routes>
         </Container>
         <Footer />
