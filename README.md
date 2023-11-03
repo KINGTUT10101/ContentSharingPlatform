@@ -4,9 +4,9 @@ This is a place for Just Another Sand Game players to share maps, mods, and more
 
 ## Installation
 
-Run “git clone [https://github.com/KINGTUT10101/ContentSharingPlatform.git”](https://github.com/KINGTUT10101/ContentSharingPlatform.git”)
-
 Make sure [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is installed
+
+Run “git clone [https://github.com/KINGTUT10101/ContentSharingPlatform.git”](https://github.com/KINGTUT10101/ContentSharingPlatform.git”)
 
 Run “cd ContentSharingPlatform”
 
