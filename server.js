@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 dotenv.config({ path: './config/config.env' })
 app.use(express.static('client/build'));
 
-// API Functions go here
+// API Functions should look like this
 app.get('/test', (req, res) => {
   res.send('Server running')
 });
@@ -23,6 +23,12 @@ app.get('/test', (req, res) => {
 // Make sure the API paths don't conflict with the React Router paths in client/src/App.js
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
 
 
