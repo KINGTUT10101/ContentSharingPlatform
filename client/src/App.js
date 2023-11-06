@@ -39,7 +39,7 @@ function App() {
         <Container sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
           <Routes>
             <Route path="/" element={ <Home /> } />
-            <Route path="profile/:userId" element={ <Profile /> } />
+            <Route path="profile/:username" element={ <Profile /> } />
             <Route path="content" element={ <ContentPage /> } />
             <Route path="browse" element={ <Browse /> } />
             <Route path="login" element={ <Login /> } />

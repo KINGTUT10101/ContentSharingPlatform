@@ -1,15 +1,31 @@
+import axios from "axios";
+import React from "react";
 import { Typography, Paper, Box, Avatar } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import RatingBar from "./RatingBar"
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 /**
  * Shows a user's profile data, including their name, PFP, bio, and average content rating
+ * @param {Object} props
+ * @param {string} props.username
  * @returns {JSX.Element} A ProfileCard component.
  */
-export default function ProfileCard () {
-  const theme = useTheme()
-  let flexDirection = useMediaQuery(theme.breakpoints.down('sm')) ? "column" : "row"
+export default function ProfileCard ({ username }) {
+  let flexDirection = useMediaQuery(useTheme().breakpoints.down('sm')) ? "column" : "row"
+
+  const [profileData, setprofileData] = React.useState(null);
+
+  React.useEffect(() => {
+    axios.get(`/api/profile/${username}`).then((response) => {
+      setprofileData(response.data);
+    });
+    alert (profileData)
+  }, []);
+
+  if (!profileData) return null
 
   return (
     <div style={{overflow: "hidden"}}>
@@ -23,16 +39,16 @@ export default function ProfileCard () {
             />
             <RatingBar fontSize="1.5rem" />
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
-              Member since: 23 March 2023
+              Member since: {profileData.CreationDate.day} {monthNames[profileData.CreationDate.month]} {profileData.CreationDate.year}
             </Typography>
           </div>
 
           <div>
             <Typography align="left" variant="h4" paddingBottom={1}>
-              Kingtut 101
+              {profileData.Username}
             </Typography>
             <Typography align="left" variant="body1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              {profileData.Bio}
             </Typography>
           </div>
         </Box>

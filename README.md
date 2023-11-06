@@ -20,7 +20,7 @@ Run "npm install" again
 
 Run “npm run dev” in the project's root directory
 
-Connect to localhost:5000 in your browser
+Connect to localhost:3000 in your browser
 
 ## Running the frontend
 

@@ -8,11 +8,11 @@ import ContentCard from "../components/ContentCard"
  * @returns {JSX.Element} A Profile component.
  */
 export default function Profile() {
-  let { param1 } = useParams();
+  let { username } = useParams();
 
   return (
     <div>
-      <ProfileCard />
+      <ProfileCard username={username} />
       <Typography align="left" variant="h5" paddingY={1}>
         23 Items
       </Typography>
