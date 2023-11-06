@@ -12,6 +12,7 @@ import Home from "./pages/Home"
 import Profile from "./pages/Profile"
 import ContentPage from "./pages/ContentPage"
 import Browse from "./pages/Browse"
+import Login from "./pages/Login"
 
 const darkTheme = createTheme({
   palette: {
@@ -39,6 +40,7 @@ function App() {
             <Route path="profile" element={ <Profile /> } />
             <Route path="content" element={ <ContentPage /> } />
             <Route path="browse" element={ <Browse /> } />
+            <Route path="login" element={ <Login /> } />
           </Routes>
         </Container>
         <Footer />

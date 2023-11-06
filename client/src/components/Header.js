@@ -26,7 +26,10 @@ interface Props {
 const drawerWidth = 240;
 const siteName = "CSP"
 const navItems = [
-  {name: 'Home', path: '/'}, {name: 'Browse', path: '/browse'}, {name: 'Profile', path: '/profile'}
+  {name: 'Home', path: '/'},
+  {name: 'Browse', path: '/browse'},
+  {name: 'Profile', path: '/profile'},
+  {name: 'Login', path: '/login'}
 ]
 
 export default function Header(props: Props) {

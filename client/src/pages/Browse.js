@@ -15,7 +15,7 @@ const sortOptions = [
 export default function Browse() {
   return (
     <div>
-      <TextField fullWidth label="Search" id="searchTerms" margin="normal" />
+      <TextField fullWidth label="Search" id="searchTerms" margin="normal" autoFocus />
       <Tooltip title="Separate each tag with a comma" placement="top-start" size="small">
         <TextField
           fullWidth
