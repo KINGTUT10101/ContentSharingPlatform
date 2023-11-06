@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { Typography, Grid, Pagination } from '@mui/material';
 import ProfileCard from "../components/ProfileCard"
 import ContentCard from "../components/ContentCard"
@@ -7,6 +8,8 @@ import ContentCard from "../components/ContentCard"
  * @returns {JSX.Element} A Profile component.
  */
 export default function Profile() {
+  let { param1 } = useParams();
+
   return (
     <div>
       <ProfileCard />

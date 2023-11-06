@@ -14,6 +14,7 @@ import ContentPage from "./pages/ContentPage"
 import Browse from "./pages/Browse"
 import Login from "./pages/Login"
 import Upload from "./pages/Upload"
+import NotFound from "./pages/NotFound"
 
 const darkTheme = createTheme({
   palette: {
@@ -38,11 +39,12 @@ function App() {
         <Container sx={{ pb: '2rem', wordWrap: 'break-word' }} style={{flex: 1}}>
           <Routes>
             <Route path="/" element={ <Home /> } />
-            <Route path="profile" element={ <Profile /> } />
+            <Route path="profile/:userId" element={ <Profile /> } />
             <Route path="content" element={ <ContentPage /> } />
             <Route path="browse" element={ <Browse /> } />
             <Route path="login" element={ <Login /> } />
             <Route path="upload" element={ <Upload /> } />
+            <Route path="*" element={ <NotFound /> } />
           </Routes>
         </Container>
         <Footer />
