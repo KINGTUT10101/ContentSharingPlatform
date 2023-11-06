@@ -28,6 +28,12 @@ Run “npm run client” in the project's root directory
 
 Connect to localhost:3000 in your browser
 
+## Building the frontend
+
+(It's recommended that you do this before running the backend. This will update the static frontend files that the backend will return to you)
+
+Run "npm run build" in the project's root directory
+
 ## Running the backend
 
 Run “npm run server” in the project's root directory
