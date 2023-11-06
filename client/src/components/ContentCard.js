@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 export default function ContentCard ({ content }) {
   return (
     <div style={{overflow: "hidden"}}>
-      <Link to="/browse" style={{ textDecoration: 'none' }}>
+      <Link to="/content" style={{ textDecoration: 'none' }}>
         <Paper elevation={20} sx={{
             transition: '0.3s',
             '&:hover': {

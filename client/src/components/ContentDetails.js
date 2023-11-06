@@ -5,10 +5,10 @@ import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
 
 /**
- * Shows a user's profile data, including their name, PFP, bio, and average content rating
- * @returns {JSX.Element} A ProfileCard component.
+ * Shows a detailed information about a piece of content, like its full description
+ * @returns {JSX.Element} A ContentDetails component.
  */
-export default function ProfileCard () {
+export default function ContentDetails () {
   const theme = useTheme()
   const smallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
   let flexDirection = smallBreakpoint ? "column" : "row"
@@ -24,15 +24,15 @@ export default function ProfileCard () {
               variant="square"
               style={{width: imageSize, height: "180px"}}
             />
-            <div style={{display: "flex", justifyContent: "center"}} paddingY={1}>
-              <Button variant="contained" style={{width: "85%"}}>Download</Button>
-            </div>
             <RatingBar fontSize="1.5rem" />
             <Box sx={{display: "flex", alignItems: "center"}}>
               <DownloadIcon />
               <Typography align="left" variant="subtitle1" paddingX={1}>
                 10,247
               </Typography>
+              <div style={{display: "flex", justifyContent: "center"}} paddingY={1}>
+                <Button variant="contained" style={{width: "85%"}}>Download</Button>
+              </div>
             </Box>
           </div>
 
@@ -47,7 +47,7 @@ export default function ProfileCard () {
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </Typography>
 
-            <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center"}} paddingTop={1}>
+            <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center", flexWrap: 'wrap'}} paddingTop={1}>
               <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
                 <Typography align="left" variant="button" paddingX={1}>
                   tag
