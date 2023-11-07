@@ -21,7 +21,7 @@ export default function ProfileCard ({ Username }) {
     axios.get(`/api/profile/${Username}`).then((response) => {
       setProfileData(response.data);
     });
-  }, []);
+  }, [Username]);
   if (!profileData) return null
 
   return (

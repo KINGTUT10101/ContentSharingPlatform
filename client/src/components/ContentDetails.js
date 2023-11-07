@@ -24,7 +24,7 @@ export default function ContentDetails ({ ContentID }) {
     axios.get(`/api/content/${ContentID}`).then((response) => {
       setContentData(response.data);
     });
-  }, []);
+  }, [ContentID]);
   if (!contentData) return null
 
   return (

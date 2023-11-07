@@ -24,6 +24,19 @@ app.get('/api/test', (req, res) => {
   res.send('Server running');
 });
 
+app.get('/api/profile/short/:Email', (req, res) => {
+  res.send({
+    Username: "KINGTUT10101",
+    CreationDate: {
+      day: 1,
+      month: 1,
+      year: 2021,
+    },
+    AccountStatus: "active",
+    ProfilePicture: null,
+  });
+});
+
 app.get('/api/profile/:Username', (req, res) => {
   res.send({
     Email: "kingtut10101@gmail.com",
@@ -77,7 +90,7 @@ app.get('/api/comment/:CommentID', (req, res) => {
     ContentID: "02496",
     CreationDate: {
       day: 8,
-      month: 24,
+      month: 11,
       year: 2022,
     },
     CommentText: "What a great piece of content! Please upload more stuff, thanks!"

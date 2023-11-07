@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { Typography, Paper, Avatar, Grid } from '@mui/material';
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 /**
  * Shows a comment left on a piece of content
  * @param {Object} props
@@ -9,13 +11,25 @@ import { Typography, Paper, Avatar, Grid } from '@mui/material';
  * @returns {JSX.Element} A Comment component.
  */
 export default function Comment ({ CommentID }) {
-  const [commentData, setCommentData] = React.useState(null);
+  const [commentData, setCommentData] = React.useState(null)
+  const [userData, setUserData] = React.useState(null)
+
   React.useEffect(() => {
-    axios.get(`/api/comment/${CommentID}`).then((response) => {
-      setCommentData(response.data);
+    // Fetch the comment data
+    axios.get(`/api/comment/${CommentID}`).then((commentResponse) => {
+      setCommentData(commentResponse.data);
+      // Using the email from the comment data, fetch the user data
+      const userEmail = commentResponse.data.UserEmail;
+      axios.get(`/api/profile/short/${userEmail}`).then((userResponse) => {
+        setUserData(userResponse.data);
+      }).catch(error => {
+        console.error("Failed to fetch user data:", error);
+      });
+    }).catch(error => {
+      console.error("Failed to fetch comment data:", error);
     });
-  }, []);
-  if (!commentData) return null
+  }, [CommentID]);
+  if (!commentData || !userData) return null
   
   return (
     <div style={{overflow: "hidden"}}>
@@ -42,13 +56,13 @@ export default function Comment ({ CommentID }) {
               style={{width: "100%", height: "100%"}}
             />
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
-              Member since: 23 March 2023
+              Member since: {userData.CreationDate.day} {monthNames[userData.CreationDate.month - 1]} {userData.CreationDate.year}
             </Typography>
           </Grid>
 
           <Grid item xs={10}>
             <Typography align="left" variant="subtitle2" sx={{ fontWeight: 'bold', marginBottom: 0.5 }}>
-              Kingtut 101 - Posted: 24 December 2022
+              {userData.Username} - Posted: {commentData.CreationDate.day} {monthNames[commentData.CreationDate.month - 1]} {commentData.CreationDate.year}
             </Typography>
             <Typography align="left" variant="body1" style={{fontSize: "0.9rem"}}>
               {commentData.CommentText}
