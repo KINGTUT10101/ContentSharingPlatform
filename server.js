@@ -45,9 +45,10 @@ app.get('/api/profile/:Username', (req, res) => {
 app.get('/api/content/:ContentID', (req, res) => {
   res.send({
     ThumbnailFilepath: null,
+    ContentID: "02496",
     Title: "My First Map",
     Description: `
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    The first map I ever made for the game! Enjoy!
     `,
     CreationDate: {
       day: 3,
@@ -66,6 +67,20 @@ app.get('/api/content/:ContentID', (req, res) => {
       "cool",
       "official",
     ]
+  });
+});
+
+app.get('/api/comment/:CommentID', (req, res) => {
+  res.send({
+    CommentID: "16558",
+    UserEmail: "kingtut10101@gmail.com",
+    ContentID: "02496",
+    CreationDate: {
+      day: 8,
+      month: 24,
+      year: 2022,
+    },
+    CommentText: "What a great piece of content! Please upload more stuff, thanks!"
   });
 });
 

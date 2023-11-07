@@ -10,7 +10,7 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
  */
 export default function RatingBar ({ fontSize="2rem" }) {
   return (
-    <Box display="flex" alignItems="center">
+    <Box display="flex" alignItems="center" style={{width: "100%"}}>
       <ArrowCircleDownIcon sx={{ color: 'red', fontSize: fontSize }} />
       <LinearProgress
         variant="determinate"
@@ -20,7 +20,8 @@ export default function RatingBar ({ fontSize="2rem" }) {
           '& .MuiLinearProgress-bar': {
             backgroundColor: 'red'
           },
-          flex: 1
+          flex: 1,
+          width: "100%"
         }}
       />
       <ArrowCircleUpIcon sx={{ color: 'green', fontSize: fontSize }} />

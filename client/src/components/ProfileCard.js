@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Typography, Paper, Box, Avatar } from '@mui/material';
+import { Typography, Paper, Avatar, Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import RatingBar from "./RatingBar"
@@ -27,28 +27,43 @@ export default function ProfileCard ({ Username }) {
   return (
     <div style={{overflow: "hidden"}}>
       <Paper elevation={20}>
-        <Box sx={{display: "flex", alignItems: "flex-start", justifyContent: "center", gap: "1rem", flexDirection: flexDirection}} padding={1}>
-          <div style={{margin: '0 auto'}}>
+        <Grid
+          container
+          direction={flexDirection}
+          alignItems="flex-start"
+          justifyContent="center"
+          padding={1}
+          spacing={3}
+        >
+          <Grid item 
+            xs={3}
+            style={{
+              margin: '0 auto',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
             <Avatar
               src="https://avatars.cloudflare.steamstatic.com/abf4ba4f97b8e409561053e0e6a4ac0795777c93_full.jpg"
               variant="square"
-              style={{width: "180px", height: "180px"}}
+              style={{width: "100%", height: "100%"}}
             />
             <RatingBar fontSize="1.5rem" />
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
               Member since: {profileData.CreationDate.day} {monthNames[profileData.CreationDate.month - 1]} {profileData.CreationDate.year}
             </Typography>
-          </div>
+          </Grid>
 
-          <div>
+          <Grid item xs={9}>
             <Typography align="left" variant="h4" paddingBottom={1}>
               {profileData.Username}
             </Typography>
             <Typography align="left" variant="body1">
               {profileData.Bio}
             </Typography>
-          </div>
-        </Box>
+          </Grid>
+        </Grid>
       </Paper>
     </div>
   )

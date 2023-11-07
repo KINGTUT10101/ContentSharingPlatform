@@ -23,7 +23,7 @@ export default function ContentPage() {
         </div>
         <div style={{display: "flex", flexDirection: "column", gap: "0.5rem"}}>
           {Array.from(Array(8)).map((_, index) => (
-            <Comment />
+            <Comment CommentID="16558" />
           ))}
         </div>
       </Container>
