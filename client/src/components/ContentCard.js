@@ -1,15 +1,27 @@
+import axios from "axios";
+import React from "react";
 import { Typography, Paper, Box } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import RatingBar from "./RatingBar"
 import { Link } from 'react-router-dom'
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 /**
  * Displays a content's data, including the thumbnail, rating, title, author, etc
  * @param {Object} props
- * @param {Object} props.content Contains all the content's data
+ * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentCard component.
  */
-export default function ContentCard ({ content }) {
+export default function ContentCard ({ ContentID }) {
+  const [contentData, setContentData] = React.useState(null);
+  React.useEffect(() => {
+    axios.get(`/api/content/${ContentID}`).then((response) => {
+      setContentData(response.data);
+    });
+  }, [ContentID]);
+  if (!contentData) return null
+  
   return (
     <div style={{overflow: "hidden"}}>
       <Link to="/content/02496" style={{ textDecoration: 'none' }}>
@@ -35,39 +47,31 @@ export default function ContentCard ({ content }) {
           </Box>
 
           <Typography align="center" variant="h5">
-            My First Map
+            {contentData.Title}
           </Typography>
           <Typography align="center" variant="subtitle2" paddingBottom={1}>
-            Kingtut 101
+            {contentData.AuthorUsername}
           </Typography>
 
           <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
             <DownloadIcon />
             <Typography align="left" variant="subtitle1" paddingX={1}>
-              10,247
+              {contentData.Downloads.toLocaleString ()}
             </Typography>
           </Box>
 
           <Typography align="left" variant="subtitle2" paddingX={1}>
-            Last Updated: 2 May 2023
+            Last Updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
           </Typography>
 
           <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center"}} padding={1}>
-            <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-              <Typography align="left" variant="button" paddingX={1}>
-                tag
-              </Typography>
-            </Paper>
-            <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-              <Typography align="left" variant="button" paddingX={1}>
-                tag
-              </Typography>
-            </Paper>
-            <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-              <Typography align="left" variant="button" paddingX={1}>
-                tag
-              </Typography>
-            </Paper>
+            {contentData.Tags.slice(0, 3).map((item) => (
+              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
+                <Typography align="left" variant="button" paddingX={1}>
+                  {item}
+                </Typography>
+              </Paper>
+            ))}
           </Box>
         </Paper>
       </Link>

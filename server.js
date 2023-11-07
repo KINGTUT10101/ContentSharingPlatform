@@ -79,7 +79,8 @@ app.get('/api/content/:ContentID', (req, res) => {
       "small",
       "cool",
       "official",
-    ]
+    ],
+    AuthorUsername: "KINGTUT10101"
   });
 });
 
