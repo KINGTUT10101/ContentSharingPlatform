@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { Pagination, Typography, Button, Container } from "@mui/material"
 import ContentDetails from "../components/ContentDetails"
 import Comment from "../components/Comment"
@@ -7,9 +8,11 @@ import Comment from "../components/Comment"
  * @returns {JSX.Element} A ContentPage component.
  */
 export default function ContentPage() {
+  let { ContentID } = useParams();
+  
   return (
     <div>
-      <ContentDetails />
+      <ContentDetails ContentID={ContentID} />
 
       <Container>
         <div style={{marginTop: "1rem", marginBottom: "0.35rem", display: "flex", gap: "0.8rem", justifyContent: "left", alignItems: "center"}}>

@@ -1,18 +1,32 @@
+import axios from "axios";
+import React from "react";
 import { Typography, Paper, Box, Avatar, Button } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 /**
  * Shows a detailed information about a piece of content, like its full description
+ * @param {Object} props
+ * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentDetails component.
  */
-export default function ContentDetails () {
+export default function ContentDetails ({ ContentID }) {
   const theme = useTheme()
   const smallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
   let flexDirection = smallBreakpoint ? "column" : "row"
   let imageSize = smallBreakpoint ? "100%" : "180px"
+
+  const [contentData, setContentData] = React.useState(null);
+  React.useEffect(() => {
+    axios.get(`/api/content/${ContentID}`).then((response) => {
+      setContentData(response.data);
+    });
+  }, []);
+  if (!contentData) return null
 
   return (
     <div style={{overflow: "hidden"}}>
@@ -25,44 +39,35 @@ export default function ContentDetails () {
               style={{width: imageSize, height: "180px"}}
             />
             <RatingBar fontSize="1.5rem" />
-            <Box sx={{display: "flex", alignItems: "center"}}>
-              <DownloadIcon />
-              <Typography align="left" variant="subtitle1" paddingX={1}>
-                10,247
-              </Typography>
-              <div style={{display: "flex", justifyContent: "center"}} paddingY={1}>
-                <Button variant="contained" style={{width: "85%"}}>Download</Button>
-              </div>
-            </Box>
+            <div style={{display: "flex", justifyContent: "center"}} paddingY={1}>
+              <Button variant="contained" style={{width: "85%"}}>
+                <DownloadIcon />
+                <Typography align="left" variant="subtitle1" paddingX={1}>
+                  {contentData.Downloads.toLocaleString ()}
+                </Typography>
+              </Button>
+            </div>
           </div>
 
           <div>
             <Typography align="left" variant="h4" paddingBottom={1}>
-              My First Map
+              {contentData.Title}
             </Typography>
             <Typography align="left" variant="subtitle2" paddingBottom={1}>
-              Last Updated: 2 May 2023
+              Last Updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
             </Typography>
             <Typography align="left" variant="body1">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              {contentData.Description}
             </Typography>
 
             <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center", flexWrap: 'wrap'}} paddingTop={1}>
-              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-                <Typography align="left" variant="button" paddingX={1}>
-                  tag
-                </Typography>
-              </Paper>
-              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-                <Typography align="left" variant="button" paddingX={1}>
-                  tag
-                </Typography>
-              </Paper>
-              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
-                <Typography align="left" variant="button" paddingX={1}>
-                  tag
-                </Typography>
-              </Paper>
+              {contentData.Tags.map((item) => (
+                <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
+                  <Typography align="left" variant="button" paddingX={1}>
+                    {item}
+                  </Typography>
+                </Paper>
+              ))}
             </Box>
           </div>
         </Box>

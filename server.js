@@ -24,10 +24,10 @@ app.get('/api/test', (req, res) => {
   res.send('Server running');
 });
 
-app.get('/api/profile/:username', (req, res) => {
+app.get('/api/profile/:Username', (req, res) => {
   res.send({
     Email: "kingtut10101@gmail.com",
-    Username: "KINGTUT 10101",
+    Username: "KINGTUT10101",
     AccountType: "admin",
     CreationDate: {
       day: 1,
@@ -39,6 +39,33 @@ app.get('/api/profile/:username', (req, res) => {
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
     `,
     ProfilePicture: null,
+  });
+});
+
+app.get('/api/content/:ContentID', (req, res) => {
+  res.send({
+    ThumbnailFilepath: null,
+    Title: "My First Map",
+    Description: `
+    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    `,
+    CreationDate: {
+      day: 3,
+      month: 3,
+      year: 2021,
+    },
+    UpdatedDate: {
+      day: 3,
+      month: 3,
+      year: 2021,
+    },
+    Downloads: 14580,
+    Tags: [
+      "tutorial",
+      "small",
+      "cool",
+      "official",
+    ]
   });
 });
 

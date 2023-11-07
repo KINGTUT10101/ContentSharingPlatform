@@ -29,7 +29,7 @@ const navItems = [
   {name: 'Home', path: '/'},
   {name: 'Browse', path: '/browse'},
   {name: 'Upload', path: '/upload'},
-  {name: 'Profile', path: '/profile'},
+  {name: 'Profile', path: '/profile/KINGTUT10101'},
   {name: 'Login', path: '/login'},
 ]
 

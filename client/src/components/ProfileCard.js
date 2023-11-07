@@ -10,21 +10,18 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 /**
  * Shows a user's profile data, including their name, PFP, bio, and average content rating
  * @param {Object} props
- * @param {string} props.username
+ * @param {string} props.Username A user's username
  * @returns {JSX.Element} A ProfileCard component.
  */
-export default function ProfileCard ({ username }) {
+export default function ProfileCard ({ Username }) {
   let flexDirection = useMediaQuery(useTheme().breakpoints.down('sm')) ? "column" : "row"
 
-  const [profileData, setprofileData] = React.useState(null);
-
+  const [profileData, setProfileData] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/api/profile/${username}`).then((response) => {
-      setprofileData(response.data);
+    axios.get(`/api/profile/${Username}`).then((response) => {
+      setProfileData(response.data);
     });
-    alert (profileData)
   }, []);
-
   if (!profileData) return null
 
   return (
@@ -39,7 +36,7 @@ export default function ProfileCard ({ username }) {
             />
             <RatingBar fontSize="1.5rem" />
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
-              Member since: {profileData.CreationDate.day} {monthNames[profileData.CreationDate.month]} {profileData.CreationDate.year}
+              Member since: {profileData.CreationDate.day} {monthNames[profileData.CreationDate.month - 1]} {profileData.CreationDate.year}
             </Typography>
           </div>
 
