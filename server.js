@@ -2,8 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import pkg from 'pg';
 
+import { fileURLToPath } from 'url';
 const PORT = process.env.PORT || 5000;
 const app = express();
 let corsOptions = {
@@ -17,6 +18,16 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: './config/config.env' });
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+//pgSQL connection
+const { Pool } = pkg;
+const pool = new Pool({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'projectEX',
+    password: 'password',
+    port: 5432,
+})
 
 // API Functions should look like this
 // Make sure they start with "/api" so they don't conflict with the frontend pages
@@ -37,6 +48,7 @@ app.get('/api/profile/short/:Email', (req, res) => {
   });
 });
 
+/*
 app.get('/api/profile/:Username', (req, res) => {
   res.send({
     Email: "kingtut10101@gmail.com",
@@ -53,6 +65,16 @@ app.get('/api/profile/:Username', (req, res) => {
     `,
     ProfilePicture: null,
   });
+});
+*/
+
+app.get('api/profile/:Username', (req, res) => {
+  pool.query('SELECT Email, Username, AccountType, CreationDate, AccountStatus, Bio FROM UserAccount', (error, results) => {
+      if (error) {
+          throw error
+      }
+      res.send(results.rows[0])
+  })
 });
 
 app.get('/api/content/:ContentID', (req, res) => {
