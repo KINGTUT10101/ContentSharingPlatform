@@ -16,6 +16,10 @@ Run “cd client”
 
 Run "npm install" again
 
+Run "cd ../server"
+
+Run "npm install" one last time
+
 ## Running the project
 
 Run “npm run dev” in the project's root directory
