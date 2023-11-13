@@ -2,12 +2,12 @@
   "name": "contentsharingplatform",
   "version": "1.0.0",
   "description": "A place for JASG players to share maps, mods, and more",
-  "main": "server.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": "node --watch server.js",
+    "start": "node ./server/index.js",
+    "server": "node --watch ./server/index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "build": "npm run build --prefix client"
@@ -16,16 +16,5 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"
-  },
-  "dependencies": {
-    "@material-ui/core": "^4.12.4",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.11.3",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.33.0"
   }
 }
