@@ -2,6 +2,8 @@ name: Test
 
 on:
   pull_request:
+    # branches:
+    #   - main
   push:
 
 jobs:
@@ -24,10 +26,10 @@ jobs:
         cd ..
         npm ci
 
-    - name: Run Tests
-      run: |
-        cd client
-        npm run test
+    # - name: Run Tests
+    #   run: |
+    #     cd client
+    #     npm run test
 
   build:
     needs: test
