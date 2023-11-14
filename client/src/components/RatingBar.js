@@ -8,13 +8,13 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
  * @param {string} props.fontSize The size of the icons on both sides of the progress bar 
  * @returns {JSX.Element} A RatingBar component
  */
-export default function RatingBar ({ fontSize="2rem" }) {
+export default function RatingBar ({ fontSize="2rem", rating=50 }) {
   return (
-    <Box display="flex" alignItems="center" style={{width: "100%"}}>
+    <Box data-testid="rating-bar" display="flex" alignItems="center" style={{width: "100%"}}>
       <ArrowCircleDownIcon sx={{ color: 'red', fontSize: fontSize }} />
       <LinearProgress
         variant="determinate"
-        value={75}
+        value={rating}
         sx={{
           backgroundColor: 'green',
           '& .MuiLinearProgress-bar': {

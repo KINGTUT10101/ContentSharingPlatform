@@ -66,7 +66,7 @@ export default function ContentCard ({ ContentID }) {
 
           <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center"}} padding={1}>
             {contentData.Tags.slice(0, 3).map((item) => (
-              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
+              <Paper key={item} elevation={5} sx={{ borderRadius: '12px' }}>
                 <Typography align="left" variant="button" paddingX={1}>
                   {item}
                 </Typography>

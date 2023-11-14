@@ -66,7 +66,7 @@ export default function ContentDetails ({ ContentID }) {
               {contentData.Title}
             </Typography>
             <Typography align="left" variant="subtitle2" paddingBottom={1}>
-              Last Updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
+              Last updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
             </Typography>
             <Typography align="left" variant="body1">
               {contentData.Description}
@@ -74,7 +74,7 @@ export default function ContentDetails ({ ContentID }) {
 
             <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center", flexWrap: 'wrap'}} paddingTop={1}>
               {contentData.Tags.map((item) => (
-                <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
+                <Paper key={item} elevation={5} sx={{ borderRadius: '12px' }}>
                   <Typography align="left" variant="button" paddingX={1}>
                     {item}
                   </Typography>
