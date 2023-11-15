@@ -12,8 +12,6 @@ RUN cd client
 
 RUN npm install
 
-RUN cd ..
-
 RUN npm run build
 
 EXPOSE 5000
