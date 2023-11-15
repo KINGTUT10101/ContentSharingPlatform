@@ -4,13 +4,13 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN NODE_ENV=development npm install
+RUN npm install
 
 COPY . .
 
 RUN cd client
 
-RUN NODE_ENV=development npm install
+RUN npm install
 
 RUN cd ..
 
