@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import RatingBar from './RatingBar';
 
 describe('RatingBar Component', () => {
@@ -12,10 +12,10 @@ describe('RatingBar Component', () => {
   });
 
   test('renders RatingBar component with custom props', () => {
-    const { getByTestId } = render(<RatingBar fontSize="3rem" rating={75} />)
+    render(<RatingBar fontSize="3rem" rating={75} />)
     
     // Ensure it renders with custom props
-    const ratingBar = getByTestId('rating-bar')
+    const ratingBar = screen.getByTestId('rating-bar')
     expect(ratingBar).toBeInTheDocument()
   })
 })

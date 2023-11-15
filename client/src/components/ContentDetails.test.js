@@ -25,16 +25,16 @@ describe('ContentDetails Component', () => {
   test('renders ContentDetails component with mock data', async () => {
     axios.get.mockResolvedValueOnce({ data: mockContentData })
 
-    const { getByText } = render(<ContentDetails ContentID={1} />)
+    render(<ContentDetails ContentID={1} />)
 
     // Check if important values were still rendered
     await waitFor(() => {
-      expect(getByText(mockContentData.Title)).toBeInTheDocument()
-      expect(getByText(mockContentData.Description)).toBeInTheDocument()
-      expect(getByText(mockContentData.Tags[0])).toBeInTheDocument()
-      expect(getByText(mockContentData.Tags[1])).toBeInTheDocument()
-      expect(getByText(mockContentData.Downloads.toLocaleString())).toBeInTheDocument()
-      expect(getByText(`Last updated: ${mockContentData.UpdatedDate.day} ${monthNames[mockContentData.UpdatedDate.month - 1]} ${mockContentData.UpdatedDate.year}`)).toBeInTheDocument()
+      expect(screen.getByText(mockContentData.Title)).toBeInTheDocument()
     })
+    expect(screen.getByText(mockContentData.Description)).toBeInTheDocument()
+    expect(screen.getByText(mockContentData.Tags[0])).toBeInTheDocument()
+    expect(screen.getByText(mockContentData.Tags[1])).toBeInTheDocument()
+    expect(screen.getByText(mockContentData.Downloads.toLocaleString())).toBeInTheDocument()
+    expect(screen.getByText(`Last updated: ${mockContentData.UpdatedDate.day} ${monthNames[mockContentData.UpdatedDate.month - 1]} ${mockContentData.UpdatedDate.year}`)).toBeInTheDocument()
   })
 })

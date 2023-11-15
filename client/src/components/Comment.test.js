@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import Comment from './Comment';
 
@@ -33,12 +33,12 @@ describe('Comment Component', () => {
     axios.get.mockResolvedValueOnce({ data: mockCommentData })
     axios.get.mockResolvedValueOnce({ data: mockUserData })
 
-    const { getByText } = render(<Comment CommentID={1} />)
+    render(<Comment CommentID={1} />)
 
     await waitFor(() => {
-      expect(getByText(`Member since: ${mockUserData.CreationDate.day} ${monthNames[mockUserData.CreationDate.month - 1]} ${mockUserData.CreationDate.year}`)).toBeInTheDocument()
-      expect(getByText(`${mockUserData.Username} - Posted: ${mockCommentData.CreationDate.day} ${monthNames[mockCommentData.CreationDate.month - 1]} ${mockCommentData.CreationDate.year}`)).toBeInTheDocument()
-      expect(getByText(mockCommentData.CommentText)).toBeInTheDocument()
+      expect(screen.getByText(`Member since: ${mockUserData.CreationDate.day} ${monthNames[mockUserData.CreationDate.month - 1]} ${mockUserData.CreationDate.year}`)).toBeInTheDocument()
     })
+    expect(screen.getByText(`${mockUserData.Username} - Posted: ${mockCommentData.CreationDate.day} ${monthNames[mockCommentData.CreationDate.month - 1]} ${mockCommentData.CreationDate.year}`)).toBeInTheDocument()
+    expect(screen.getByText(mockCommentData.CommentText)).toBeInTheDocument()
   })
 })

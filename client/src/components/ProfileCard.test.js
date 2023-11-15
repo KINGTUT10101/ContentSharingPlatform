@@ -1,5 +1,5 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 
@@ -22,18 +22,16 @@ describe('ProfileCard Component', () => {
   test('renders ProfileCard component with mocked data', async () => {
     axios.get.mockResolvedValue({ data: mockProfileData })
 
-    const { getByText } = render(<ProfileCard Username="testuser" />)
+    render(<ProfileCard Username="testuser" />)
 
     // Wait for data fetching to complete
     await waitFor(() => {
       // Ensure that the important data is rendered after fetching
-      const usernameElement = getByText('testuser')
+      const usernameElement = screen.getByText('testuser')
       expect(usernameElement).toBeInTheDocument()
-
-      const bioElement = getByText('This is a test bio')
-      expect(bioElement).toBeInTheDocument()
-
-      expect(getByText(`Member since: ${mockProfileData.CreationDate.day} ${monthNames[mockProfileData.CreationDate.month - 1]} ${mockProfileData.CreationDate.year}`)).toBeInTheDocument()
     })
+    const bioElement = screen.getByText('This is a test bio')
+    expect(bioElement).toBeInTheDocument()
+    expect(screen.getByText(`Member since: ${mockProfileData.CreationDate.day} ${monthNames[mockProfileData.CreationDate.month - 1]} ${mockProfileData.CreationDate.year}`)).toBeInTheDocument()
   })
 })

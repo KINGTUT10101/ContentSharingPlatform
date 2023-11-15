@@ -32,4 +32,4 @@ jobs:
         npm run test
 
     - name: Lint files
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint "client/src/**/*.{js,jsx,ts,tsx}"
