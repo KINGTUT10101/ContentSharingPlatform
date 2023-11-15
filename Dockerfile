@@ -8,11 +8,13 @@ RUN npm install
 
 COPY . .
 
-RUN cd client
+WORKDIR /app/client
 
 RUN npm install
 
-RUN npx react-scripts build
+RUN npm install react-scripts -g
+
+RUN npm run build
 
 EXPOSE 5000
 
