@@ -8,12 +8,15 @@ import { Link } from 'react-router-dom'
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
+ * @module Components
+ */
+/**
  * Displays a content's data, including the thumbnail, rating, title, author, etc
  * @param {Object} props
  * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentCard component.
  */
-export default function ContentCard ({ ContentID }) {
+function ContentCard ({ ContentID }) {
   const [contentData, setContentData] = React.useState(null);
   React.useEffect(() => {
     axios.get(`/api/content/${ContentID}`).then((response) => {
@@ -78,3 +81,5 @@ export default function ContentCard ({ ContentID }) {
     </div>
   );
 }
+
+export default ContentCard

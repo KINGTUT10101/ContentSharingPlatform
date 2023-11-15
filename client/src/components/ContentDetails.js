@@ -9,12 +9,15 @@ import DownloadIcon from '@mui/icons-material/Download';
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
+ * @module Components
+ */
+/**
  * Shows a detailed information about a piece of content, like its full description
  * @param {Object} props
  * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentDetails component.
  */
-export default function ContentDetails ({ ContentID }) {
+function ContentDetails ({ ContentID }) {
   const theme = useTheme()
   const smallBreakpoint = useMediaQuery(theme.breakpoints.down('sm'))
   let flexDirection = smallBreakpoint ? "column" : "row"
@@ -87,3 +90,5 @@ export default function ContentDetails ({ ContentID }) {
     </div>
   )
 }
+
+export default ContentDetails

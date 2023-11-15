@@ -2,10 +2,13 @@ import ContentCard from "../components/ContentCard"
 import { Grid, Typography } from "@mui/material"
 
 /**
+ * @module Pages
+ */
+/**
  * The main page of the website. Shows recent announcements and featured content
  * @returns {JSX.Element} A Home component.
  */
-export default function Home() {
+function Home() {
   return (
     <div>
       <Typography variant="h4" align="center" paddingBottom={4}>
@@ -22,3 +25,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home

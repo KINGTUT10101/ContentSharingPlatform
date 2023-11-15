@@ -8,12 +8,15 @@ import RatingBar from "./RatingBar"
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
+ * @module Components
+ */
+/**
  * Shows a user's profile data, including their name, PFP, bio, and average content rating
  * @param {Object} props
  * @param {string} props.Username A user's username
  * @returns {JSX.Element} A ProfileCard component.
  */
-export default function ProfileCard ({ Username }) {
+function ProfileCard ({ Username }) {
   let flexDirection = useMediaQuery(useTheme().breakpoints.down('sm')) ? "column" : "row"
 
   const [profileData, setProfileData] = React.useState(null);
@@ -68,3 +71,5 @@ export default function ProfileCard ({ Username }) {
     </div>
   )
 }
+
+export default ProfileCard

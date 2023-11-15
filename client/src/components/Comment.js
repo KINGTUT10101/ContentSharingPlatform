@@ -5,12 +5,15 @@ import { Typography, Paper, Avatar, Grid } from '@mui/material';
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
+ * @module Components
+ */
+/**
  * Shows a comment left on a piece of content
  * @param {Object} props
  * @param {string} props.CommentID // The ID of a comment on a piece of content
  * @returns {JSX.Element} A Comment component.
  */
-export default function Comment ({ CommentID }) {
+function Comment ({ CommentID }) {
   const [commentData, setCommentData] = React.useState(null)
   const [userData, setUserData] = React.useState(null)
 
@@ -73,3 +76,5 @@ export default function Comment ({ CommentID }) {
     </div>
   )
 }
+
+export default Comment

@@ -10,14 +10,18 @@
     "server": "node --watch server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run build --prefix client"
+    "build": "npm run build --prefix client",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2",
+    "docdash": "^2.0.2",
     "eslint": "^8.53.0",
-    "eslint-plugin-react": "^7.33.2"
+    "eslint-plugin-react": "^7.33.2",
+    "jsdoc": "^4.0.2",
+    "jsdoc-to-markdown": "^8.0.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",

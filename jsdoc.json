@@ -1,0 +1,37 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["client/src"]
+  },
+  "opts": {
+    "template": "node_modules/docdash",
+    "destination": "./docs",
+    "readme": "README.md",
+    "recurse": true
+  },
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true,
+    "collapse": true,
+    "typedefs": true,
+    "removeQuotes": "none",
+    "scripts": [],
+    "menu":{
+        "Github repo": {
+            "href":"https://github.com/KINGTUT10101/ContentSharingPlatform",
+            "target":"_blank",
+            "class":"menu-item",
+            "id":"repository"
+        }
+    }
+  },
+  "templates": {
+    "default": {
+        "useLongnameInNav": true
+    }
+  }
+}

@@ -9,10 +9,13 @@ const sortOptions = [
 ]
 
 /**
+ * @module Pages
+ */
+/**
  * Allows users to browse for content by applying tags, search terms, categories, etc
  * @returns {JSX.Element} A Browse component.
  */
-export default function Browse() {
+function Browse() {
   return (
     <div>
       <TextField fullWidth label="Search" id="searchTerms" margin="normal" autoFocus />
@@ -56,3 +59,5 @@ export default function Browse() {
     </div>
   )
 }
+
+export default Browse
