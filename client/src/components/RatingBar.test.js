@@ -4,10 +4,10 @@ import RatingBar from './RatingBar';
 
 describe('RatingBar Component', () => {
   test('renders RatingBar component with default props', () => {
-    const { getByTestId } = render(<RatingBar />)
+    render(<RatingBar />)
     
     // Ensure the default version renders without errors
-    const ratingBar = getByTestId('rating-bar')
+    const ratingBar = screen.getByTestId('rating-bar')
     expect(ratingBar).toBeInTheDocument()
   });
 
