@@ -27,6 +27,7 @@ jobs:
 
       - name: Build docs
         run: |
+          npm install docdash
           npm install jsdoc -g
           npm run docs
 
