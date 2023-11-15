@@ -26,7 +26,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build docs
-        run: npm run docs
+        run: |
+          npm install jsdoc -g
+          npm run docs
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
