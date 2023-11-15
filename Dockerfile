@@ -12,7 +12,7 @@ RUN cd client
 
 RUN npm install
 
-RUN npm run build
+RUN npx react-scripts build
 
 EXPOSE 5000
 
