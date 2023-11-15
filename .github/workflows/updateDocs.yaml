@@ -8,10 +8,18 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout code
@@ -25,9 +33,18 @@ jobs:
           config_file: jsdoc.json
           template: docdash
           front_page: README.md
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
           
       - name: Upload docs
         uses: actions/upload-artifact@v2
         with:
           name: docs
           path: ./docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        with:
+          artifact_name: docs
