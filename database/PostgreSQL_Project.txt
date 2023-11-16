@@ -1,0 +1,41 @@
+-- PostgreSQL Table for UserAccounts
+CREATE TABLE UserAccount (
+    Email VARCHAR(255) PRIMARY KEY,
+    Username VARCHAR(255) UNIQUE NOT NULL,
+    Password TEXT NOT NULL,
+    AccountType VARCHAR(50) CHECK (AccountType IN ('standard', 'admin')),
+    CreationDate TIMESTAMP NOT NULL,
+    AccountStatus VARCHAR(50) CHECK (AccountStatus IN ('active', 'restricted', 'banned')),
+    Bio TEXT
+);
+-- PostgreSQL Table for FeaturedContent
+CREATE TABLE FeaturedContent (
+    ContentID INT PRIMARY KEY,
+    FeaturedDate TIMESTAMP NOT NULL
+);
+-- PostgreSQL Table for Comments
+CREATE TABLE Comment (
+    CommentID SERIAL PRIMARY KEY,
+    UserEmail VARCHAR(255) REFERENCES UserAccount(Email),
+    ContentID INT REFERENCES FeaturedContent(ContentID),
+    CommentText TEXT NOT NULL,
+    CreationDate TIMESTAMP NOT NULL
+);
+-- PostgreSQL Table for Reports
+CREATE TABLE Report (
+    ReportID SERIAL PRIMARY KEY,
+    ItemID INT,
+    ReporterID INT REFERENCES UserAccount(Email),
+    ItemType VARCHAR(50),
+    ReportText TEXT NOT NULL,
+    CreationDate TIMESTAMP NOT NULL,
+    ReportType VARCHAR(50),
+    ReportStatus VARCHAR(50) CHECK (ReportStatus IN ('Open', 'Closed', 'Reviewed'))
+);
+-- PostgreSQL Table for Ratings
+CREATE TABLE Rating (
+    UserEmail VARCHAR(255) REFERENCES UserAccount(Email),
+    ContentID INT REFERENCES FeaturedContent(ContentID),
+    RatingType VARCHAR(50) CHECK (RatingType IN ('positive', 'negative')),
+    PRIMARY KEY (UserEmail, ContentID)
+);
