@@ -17,7 +17,7 @@ CREATE TABLE FeaturedContent (
 CREATE TABLE Comment (
     CommentID SERIAL PRIMARY KEY,
     UserEmail VARCHAR(255) REFERENCES UserAccount(Email),
-    ContentID INT REFERENCES FeaturedContent(ContentID),
+    ContentID INT NOT NULL,
     CommentText TEXT NOT NULL,
     CreationDate TIMESTAMP NOT NULL
 );
@@ -25,7 +25,7 @@ CREATE TABLE Comment (
 CREATE TABLE Report (
     ReportID SERIAL PRIMARY KEY,
     ItemID INT,
-    ReporterID INT REFERENCES UserAccount(Email),
+    ReporterID VARCHAR(255) REFERENCES UserAccount(Email),
     ItemType VARCHAR(50),
     ReportText TEXT NOT NULL,
     CreationDate TIMESTAMP NOT NULL,
