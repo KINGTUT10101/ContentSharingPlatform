@@ -71,8 +71,8 @@ INSERT INTO Comment (UserEmail, ContentID, CommentText, CreationDate) VALUES
 ('jane.smith@example.com', 1, 'Really enjoyed this, thanks for sharing!', '2023-04-03 10:15:00');
 
 INSERT INTO Report (ItemID, ReporterID, ItemType, ReportText, CreationDate, ReportType, ReportStatus) VALUES
-(1, 'john.doe@example.com', 'comment', 'This comment is inappropriate.', '2023-04-04 10:00:00', 'Abuse', 'open'),
-(2, 'jane.smith@example.com', 'content', 'This content is stolen from another creator.', '2023-04-04 10:30:00', 'Copyright', 'user banned');
+(1, 'john.doe@example.com', 'comment', 'This comment is inappropriate.', '2023-04-04 10:00:00', 'Abuse', 'Open'),
+(2, 'jane.smith@example.com', 'content', 'This content is stolen from another creator.', '2023-04-04 10:30:00', 'Copyright', 'Reviewed');
 
 INSERT INTO Rating (UserEmail, ContentID, RatingType) VALUES
 ('john.doe@example.com', 1, 'positive'),
