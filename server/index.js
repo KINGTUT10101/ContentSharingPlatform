@@ -18,6 +18,7 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: './config/config.env' });
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use(express.static('./media'));
 
 // API Functions should look like this
 // Make sure they start with "/api" so they don't conflict with the frontend pages
