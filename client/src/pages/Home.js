@@ -15,7 +15,7 @@ export default function Home() {
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center" alignItems="center">
         {Array.from(Array(8)).map((_, index) => (
           <Grid item xs={2} sm={3} md={4}>
-            <ContentCard />
+            <ContentCard ContentID="655a0db33961f9437c3aa269" />
           </Grid>
         ))}
       </Grid>
