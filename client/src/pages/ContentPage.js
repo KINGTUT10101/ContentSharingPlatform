@@ -4,10 +4,13 @@ import ContentDetails from "../components/ContentDetails"
 import Comment from "../components/Comment"
 
 /**
+ * @module Pages
+ */
+/**
  * Shows more detailed information about a piece of content and its comments
  * @returns {JSX.Element} A ContentPage component.
  */
-export default function ContentPage() {
+function ContentPage() {
   let { ContentID } = useParams();
   
   return (
@@ -31,3 +34,5 @@ export default function ContentPage() {
     </div>
   )
 }
+
+export default ContentPage

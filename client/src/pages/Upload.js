@@ -1,10 +1,13 @@
 import { Typography, TextField, Button, Tooltip } from "@mui/material"
 
 /**
+ * @module Pages
+ */
+/**
  * Allows users to log into their profiles, which is required to upload content and leave comments
  * @returns {JSX.Element} A Login component.
  */
-export default function Upload() {
+function Upload() {
   return (
     <div>
       <Typography align="center" variant="h5" paddingBottom={1}>
@@ -33,3 +36,5 @@ export default function Upload() {
     </div>
   )
 }
+
+export default Upload

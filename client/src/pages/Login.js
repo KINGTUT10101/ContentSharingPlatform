@@ -1,10 +1,13 @@
 import { Paper, Typography, TextField, Button } from "@mui/material"
 
 /**
+ * @module Pages
+ */
+/**
  * Allows users to log into their profiles, which is required to upload content and leave comments
  * @returns {JSX.Element} A Login component.
  */
-export default function Login() {
+function Login() {
   return (
     <div style={{overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"}}>
       <Paper elevation={20} style={{width: "25rem", padding: "1.5rem"}}>
@@ -22,3 +25,5 @@ export default function Login() {
     </div>
   )
 }
+
+export default Login

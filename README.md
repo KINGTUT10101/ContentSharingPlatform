@@ -2,6 +2,10 @@
 
 This is a place for Just Another Sand Game players to share maps, mods, and more!
 
+## Documentation
+
+https://kingtut10101.github.io/ContentSharingPlatform/
+
 ## Installation
 
 Make sure [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is installed

@@ -6,12 +6,15 @@ import RatingBar from "./RatingBar"
 import { Link } from 'react-router-dom'
 
 /**
+ * @module Components
+ */
+/**
  * Displays a content's data, including the thumbnail, rating, title, author, etc
  * @param {Object} props
  * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentCard component.
  */
-export default function ContentCard ({ ContentID }) {
+function ContentCard ({ ContentID }) {
   const [contentData, setContentData] = React.useState(null);
   React.useEffect(() => {
     axios.get(`/api/contentCard/${ContentID}`).then((response) => {
@@ -69,7 +72,7 @@ export default function ContentCard ({ ContentID }) {
 
           <Box sx={{display: "flex", gap: "0.25rem", alignItems: "center"}} padding={1}>
             {contentData.Tags.slice(0, 3).map((item) => (
-              <Paper variant="outlined" elevation={5} sx={{ borderRadius: '12px' }}>
+              <Paper key={item} elevation={5} sx={{ borderRadius: '12px' }}>
                 <Typography align="left" variant="button" paddingX={1}>
                   {item}
                 </Typography>
@@ -81,3 +84,5 @@ export default function ContentCard ({ ContentID }) {
     </div>
   );
 }
+
+export default ContentCard

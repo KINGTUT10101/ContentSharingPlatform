@@ -4,10 +4,13 @@ import ProfileCard from "../components/ProfileCard"
 import ContentCard from "../components/ContentCard"
 
 /**
+ * @module Pages
+ */
+/**
  * Shows information about a user and the content they've uploaded
  * @returns {JSX.Element} A Profile component.
  */
-export default function Profile() {
+function Profile() {
   let { Username } = useParams();
 
   return (
@@ -27,3 +30,5 @@ export default function Profile() {
     </div>
   )
 }
+
+export default Profile
