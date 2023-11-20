@@ -32,16 +32,16 @@ async function getContent (ContentID, proj){
 router.get('/contentDetails/:ContentID', async (req, res) => { 
   let proj = {projection: {_id:0, ContentType:0, ContentFileSize:0, CreationDate:0}}
   const result = await getContent(req.params.ContentID,proj);
-  if(!result) res.send('Not found').status(404);
-  res.send(result).status(200);
+  if(!result) res.status(404).send('Not found');
+  res.status(200).send(result);
 });
 
 //api/contentCard/:ContentID
 router.get('/contentCard/:ContentID', async (req, res) => {
   let proj = {projection: {_id:0, ContentType:0, ContentFileSize:0, CreationDate:0, Description:0}}
   const result = await getContent(req.params.ContentID,proj);
-  if(!result) res.send('Not found').status(404);
-  else res.send(result).status(200);
+  if(!result) res.status(404).send('Not found');
+  else res.status(200).send(result);
 });
 
 //SQL
@@ -52,8 +52,8 @@ router.get('/contentCard/:ContentID', async (req, res) => {
     const result = await sbd.query(`SELECT Email, Username, AccountType, CreationDate, AccountStatus, Bio 
                                     FROM UserAccount 
                                     WHERE Username = $1`, [username]);
-    if (!result) res.send('Not found').status(404);
-    else res.send(result.rows[0]).status(200);
+    if (result.rows.length === 0) res.status(404).send('Not found');
+    else res.status(200).send(result.rows[0]);
   });
   
     //COMMENT 
@@ -72,8 +72,8 @@ router.get('/contentCard/:ContentID', async (req, res) => {
                                     WHERE contentid = $1
                                     ORDER BY c.CreationDate DESC
                                     LIMIT $2 OFFSET $3`,[req.params.ContentID,limit,offset]);
-    if (!result) res.send('Not Found').status(404);
-    else res.send(result.rows).status(200);
+    if (!result) res.status(404).send('Not Found');
+    else res.status(200).send(result.rows);
   });
 
   export default router;
