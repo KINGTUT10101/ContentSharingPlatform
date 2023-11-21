@@ -12,67 +12,15 @@ db.Announcements.insert({
 // Focus here
 
 db.Content.insert({
-  AuthorEmail: "author@example.com", // This would be your FK, ensure this references an existing document in the Users collection (if you have one)
-  ContentType: "map", // This should be one of your predefined options: map, mod, puzzle
-  ContentFilepath: "/path/to/backend/file", // The local file path on the backend machine
-  ContentFileSize: "size-in-bytes", // Replace with the actual file size
-  ThumbnailFilepath: "/path/to/backend/thumbnail", // The local file path for the thumbnail
-  Title: "Content Title",
-  Description: "Content Description",
-  CreationDate: new Date(),
-  Downloads: 0, // Assuming no downloads when first creating the content
-  Tags: ["tag1", "tag2"], // An array of strings representing tags
-  UpdatedDate: new Date() // Set this to the current date as a placeholder
+  authorEmail: "author@example.com", // This would be your FK, ensure this references an existing document in the Users collection (if you have one)
+  contentType: "map", // This should be one of your predefined options: map, mod, puzzle
+  contentFileSize: "size-in-bytes", // Replace with the actual file size
+  title: "Content Title",
+  description: "Content Description",
+  creationDate: new Date(),
+  downloads: 0, // Assuming no downloads when first creating the content
+  tags: ["tag1", "tag2"], // An array of strings representing tags
+  updatedDate: new Date() // Set this to the current date as a placeholder
 });
-db.Content.insert({
-  AuthorEmail: "adventurelover@example.com",
-  ContentType: "map",
-  ContentFilepath: "/maps/adventure_map_v1",
-  ContentFileSize: "2560",
-  ThumbnailFilepath: "/thumbnails/adventure_thumb.jpg",
-  Title: "Mystery Island Adventure",
-  Description: "Explore the hidden mysteries of this island map",
-  CreationDate: new Date("2023-01-15"),
-  Downloads: 142,
-  Tags: ["adventure", "island", "mystery"],
-  UpdatedDate: new Date("2023-02-20")
-});
-db.Content.insert({
-  AuthorEmail: "educator@example.com",
-  ContentType: "mod",
-  ContentFilepath: "/mods/educational_mod_kids",
-  ContentFileSize: "1024",
-  ThumbnailFilepath: "/thumbnails/edu_mod_thumb.png",
-  Title: "Kids Learning Mod",
-  Description: "A mod that turns gameplay into an educational experience for children",
-  CreationDate: new Date("2023-03-10"),
-  Downloads: 200,
-  Tags: ["education", "children", "learning"],
-  UpdatedDate: new Date("2023-04-05")
-});
-db.Content.insert({
-  AuthorEmail: "puzzlecreator@example.com",
-  ContentType: "puzzle",
-  ContentFilepath: "/puzzles/space_puzzle_challenge",
-  ContentFileSize: "768",
-  ThumbnailFilepath: "/thumbnails/space_puzzle.jpg",
-  Title: "Space Odyssey Puzzle",
-  Description: "A challenging puzzle that takes you through the depths of space",
-  CreationDate: new Date("2023-05-21"),
-  Downloads: 85,
-  Tags: ["space", "odyssey", "challenge"],
-  UpdatedDate: new Date("2023-06-01")
-});
-db.Content.insert({
-  AuthorEmail: "cityplanner@example.com",
-  ContentType: "map",
-  ContentFilepath: "/maps/city_strategy_map",
-  ContentFileSize: "2048",
-  ThumbnailFilepath: "/thumbnails/city_map_thumb.jpg",
-  Title: "Urban Planner's Delight",
-  Description: "A detailed city map perfect for strategic urban planning games",
-  CreationDate: new Date("2023-07-11"),
-  Downloads: 300,
-  Tags: ["urban", "strategy", "planning"],
-  UpdatedDate: new Date("2023-08-15")
-});
+
+db.Content.createIndex({ title: "text" });
