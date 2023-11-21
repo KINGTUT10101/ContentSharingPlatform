@@ -44,6 +44,24 @@ router.get('/contentCard/:ContentID', async (req, res) => {
   else res.status(200).send(result);
 });
 
+// Gets the number of pieces of content that the user has uploaded
+router.get('/contentCount/:Username', async (req, res) => {
+  const username = req.params.Username
+  // Gets the email for the user
+  const sqlResult = await sbd.query(`SELECT Email
+                                  FROM UserAccount 
+                                  WHERE Username = $1
+                                  LIMIT 1`, [username]);
+  if (sqlResult.rows.length === 0) res.status(404).send('Not found');
+  const email = sqlResult.rows[0].email
+
+  // Count the number of documents for the email in MongoDB
+  let collection = mdb.collection('Content');
+  const query = {AuthorEmail: email}
+  let mdbResult = await collection.countDocuments(query);
+  res.status(200).send({count: mdbResult});
+});
+
 //SQL
     //USER
   //add profile pic
@@ -72,7 +90,7 @@ router.get('/contentCard/:ContentID', async (req, res) => {
                                     WHERE contentid = $1
                                     ORDER BY c.CreationDate DESC
                                     LIMIT $2 OFFSET $3`,[req.params.ContentID,limit,offset]);
-    if (!result) res.status(404).send('Not Found');
+    if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
   });
 
@@ -81,7 +99,7 @@ router.get('/contentCard/:ContentID', async (req, res) => {
     const result = await sbd.query(`SELECT COUNT (*)
                                     FROM Comment
                                     WHERE contentid = $1`,[req.params.ContentID]);
-    if (!result) res.status(404).send('Not Found');
+    if (result.rows.length === 0) res.status(404).send('Not Found');
     else res.status(200).send(result.rows[0]);
   });
 

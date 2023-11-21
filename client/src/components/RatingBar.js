@@ -18,7 +18,7 @@ function RatingBar ({ fontSize="2rem", rating=50 }) {
       <ArrowCircleDownIcon sx={{ color: 'red', fontSize: fontSize }} />
       <LinearProgress
         variant="determinate"
-        value={rating}
+        value={100 - rating}
         sx={{
           backgroundColor: 'green',
           '& .MuiLinearProgress-bar': {
