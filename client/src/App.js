@@ -19,6 +19,9 @@ import NotFound from "./pages/NotFound"
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    // primary: {
+    //   main: '#FF0000', // Change this to your desired link color
+    // },
   },
 });
 

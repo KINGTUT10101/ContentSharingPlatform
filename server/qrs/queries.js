@@ -62,8 +62,8 @@ router.get('/contentCard/:ContentID', async (req, res) => {
     //Calculate where we start taking the comments + error handling
     if(!parseInt(req.query.count) || req.query.count<0) req.query.count = 20;
     const limit = req.query.count;
-    if(!parseInt(req.query.page) || req.query.page<0) req.query.page = 0;
-    const offset = req.query.count*req.query.page;
+    if(!parseInt(req.query.page) || req.query.page<1) req.query.page = 1;
+    const offset = req.query.count*(req.query.page - 1);
 
     //Use AuthorEmail to get the rest of the stuff from SQL
     const result = await sbd.query(`SELECT u.Username,u.CreationDate AS ucd,c.CreationDate AS ccd,c.CommentText
@@ -74,6 +74,15 @@ router.get('/contentCard/:ContentID', async (req, res) => {
                                     LIMIT $2 OFFSET $3`,[req.params.ContentID,limit,offset]);
     if (!result) res.status(404).send('Not Found');
     else res.status(200).send(result.rows);
+  });
+
+  //api/commentCount/{ContentID}
+  router.get('/commentCount/:ContentID', async (req, res) => {
+    const result = await sbd.query(`SELECT COUNT (*)
+                                    FROM Comment
+                                    WHERE contentid = $1`,[req.params.ContentID]);
+    if (!result) res.status(404).send('Not Found');
+    else res.status(200).send(result.rows[0]);
   });
 
   export default router;

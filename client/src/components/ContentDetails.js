@@ -3,10 +3,9 @@ import React from "react";
 import { Typography, Paper, Box, Avatar, Button, Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
-
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
  * @module Components
@@ -24,11 +23,16 @@ function ContentDetails ({ ContentID }) {
 
   const [contentData, setContentData] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/api/content/${ContentID}`).then((response) => {
+    axios.get(`/api/contentDetails/${ContentID}`).then((response) => {
       setContentData(response.data);
     });
   }, [ContentID]);
   if (!contentData) return null
+
+  const timestampDate = new Date (contentData.UpdatedDate)
+  const month = timestampDate.toLocaleString('default', { month: 'long' });
+  const day = timestampDate.getDate();
+  const year = timestampDate.getFullYear();
 
   return (
     <div style={{overflow: "hidden"}}>
@@ -55,7 +59,7 @@ function ContentDetails ({ ContentID }) {
               variant="square"
               style={{width: "100%", height: "100%"}}
             />
-            <RatingBar fontSize="1.5rem" />
+            <RatingBar fontSize="1.5rem" rating={contentData.avgRat * 100} />
             <Button variant="contained" style={{width: "75%"}}>
               <DownloadIcon />
               <Typography align="left" variant="subtitle1" paddingX={1}>
@@ -69,7 +73,7 @@ function ContentDetails ({ ContentID }) {
               {contentData.Title}
             </Typography>
             <Typography align="left" variant="subtitle2" paddingBottom={1}>
-              Last updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
+              <Link to={`/profile/${contentData.username}`} style={{ textDecoration: 'none' }}>{contentData.username}</Link> - Last updated: {day} {month} {year}
             </Typography>
             <Typography align="left" variant="body1">
               {contentData.Description}

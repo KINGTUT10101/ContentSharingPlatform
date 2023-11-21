@@ -30,7 +30,7 @@ function ContentCard ({ ContentID }) {
   
   return (
     <div style={{overflow: "hidden"}}>
-      <Link to={`/content/${ContentID}`} style={{ textDecoration: 'none' }}>
+      <Link to={`/content/${ContentID}?page=1`} style={{ textDecoration: 'none' }}>
         <Paper elevation={20} sx={{
             transition: '0.3s',
             '&:hover': {
@@ -49,14 +49,14 @@ function ContentCard ({ ContentID }) {
           </div>
 
           <Box paddingX={1}>
-            <RatingBar />
+            <RatingBar rating={contentData.avgRat * 100} />
           </Box>
 
           <Typography align="center" variant="h5">
             {contentData.Title}
           </Typography>
           <Typography align="center" variant="subtitle2" paddingBottom={1}>
-            {contentData.username}
+          <Link to={`/profile/${contentData.username}`} style={{ textDecoration: 'none' }}>{contentData.username}</Link>
           </Typography>
 
           <Box sx={{display: "flex", alignItems: "center"}} paddingX={1}>
