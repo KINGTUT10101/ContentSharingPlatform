@@ -1,4 +1,8 @@
+import axios from "axios";
+import React from "react";
 import { Typography, TextField, Button, Tooltip } from "@mui/material"
+import { Navigate } from "react-router-dom";
+import getToken from "../getToken"
 
 /**
  * @module Pages
@@ -8,6 +12,28 @@ import { Typography, TextField, Button, Tooltip } from "@mui/material"
  * @returns {JSX.Element} A Login component.
  */
 function Upload() {
+  const token = getToken()
+
+  // Perform the request with the token here
+  const [test, setTest] = React.useState(null);
+  React.useEffect(() => {
+    axios.get(`/api/protected`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+    }).then((response) => {
+      setTest(response.data);
+    }).catch ((reason)=>alert ("Error: " + reason))
+    alert (test)
+  }, [token, test]);
+
+
+
+  if (!token) {
+    return <Navigate to="/login" />
+  }
+
   return (
     <div>
       <Typography align="center" variant="h5" paddingBottom={1}>

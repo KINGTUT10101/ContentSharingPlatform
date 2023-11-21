@@ -1,8 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
 import query from './qrs/queries.js';
+import login from './qrs/login.js';
 import { fileURLToPath } from 'url';
 
 const PORT = process.env.PORT || 5000;
@@ -14,7 +16,8 @@ let corsOptions = {
 // Replace __dirname with a similar variable using the new ES Modules syntax
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(cors(corsOptions));
+app.use(bodyParser.json())
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: './config/config.env' });
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
@@ -26,8 +29,9 @@ app.get('/api/test', (req, res) => {
   res.send('Server running');
 });
 
-//Queries 
+//Queries and login
 app.use('/api', query);
+app.use('/api', login);
 
 // Serves the static frontend content
 app.get('*', (req, res) => {
