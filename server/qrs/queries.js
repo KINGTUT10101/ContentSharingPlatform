@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs;"
 import sbd from "../db/sqlConn.js";
 import mdb from "../db/mongoConn.js";
 import { ObjectId } from "mongodb";
@@ -21,12 +22,15 @@ router.post('/contentUpload/:UserEmail', async (req, res) => {
     doc.authorEmail = req.params.UserEmail;
     doc.updatedDate = doc.creationDate;
     doc.downloads = 0;
-    
+    const mappy = doc.mapDat;
+    delete doc.mapDat;
+
     //upload it
     let result = await collection.insertOne(doc);
     if(!result) res.status(420).send('Upload Error');
-    console.log(result.insertedId);
     res.status(200).send(result.insertedId);
+    fs.writeFile("../media/mapData/${result.insertedId}.slf",mappy);
+
   }catch (error) {
     console.error('Error in /contentUpload/:UserEmail', error);
     res.status(500).send('Server error');
