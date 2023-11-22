@@ -1,9 +1,14 @@
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import React from "react";
-import { Pagination, Typography, Button, Container } from "@mui/material"
+import { Pagination, Typography, Button, Container, IconButton } from "@mui/material"
+import InsertCommentIcon from '@mui/icons-material/InsertComment';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ContentDetails from "../components/ContentDetails"
 import Comment from "../components/Comment"
+import ArrowCircleDown from '@mui/icons-material/ArrowCircleDown';
+import getToken from "../getToken"
 
 const commentsPerPage = 20
 
@@ -16,6 +21,7 @@ const commentsPerPage = 20
  */
 function ContentPage() {
   let { ContentID } = useParams();
+  const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = React.useState(Number (searchParams.get('page')) ?? 1)
   if (page === undefined || page < 1) setPage (1)
@@ -40,13 +46,51 @@ function ContentPage() {
     window.scrollTo(0, 0)
   }
 
+  async function onRate (rating) {
+    const token = getToken ()
+    const username = localStorage.getItem('username')
+
+    if (!token || !username) {
+      alert ("Please log in")
+      navigate(`/login`)
+      return
+    }
+    
+    let config = {
+      method: "post",
+      maxBodyLength: Infinity,
+      url: `/api/rate/${ContentID}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      data: {
+        username: username,
+        rating: rating
+      },
+    }
+
+    axios.request(config).then((response) => {
+      alert ("Content successfully rated!")
+    }).catch ((reason)=>alert ("Error (Note that you can't rate multiple times): " + reason))
+  }
+
   return (
     <div>
       <ContentDetails ContentID={ContentID} />
 
       <Container>
         <div style={{marginTop: "1rem", marginBottom: "0.35rem", display: "flex", gap: "0.8rem", justifyContent: "left", alignItems: "center"}}>
-          <Button variant="contained" style={{height: "80%"}}>Leave a comment</Button>
+          <IconButton onClick={()=>onRate(false)} style={{height: "80%"}}>
+            <ArrowCircleDownIcon />
+          </IconButton>
+          <IconButton onClick={()=>onRate(true)} style={{height: "80%"}}>
+            <ArrowCircleUpIcon />
+          </IconButton>
+
+          <IconButton style={{height: "80%"}}>
+            <InsertCommentIcon />
+          </IconButton>
           <Typography align="left" variant="h5" fontSize="1.25rem" paddingY={1}>
             {commentCount} Comments
           </Typography>

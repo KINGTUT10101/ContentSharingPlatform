@@ -39,6 +39,7 @@ CREATE TABLE Rating (
     ContentID VARCHAR(25) NOT NULL,
     RatingType BOOLEAN,
     PRIMARY KEY (UserEmail, ContentID)
+    CONSTRAINT unique_rating_entry UNIQUE (UserEmail, ContentID)
 );
 CREATE VIEW averageRating AS	
     SELECT contentid, avg(CAST(ratingtype AS INT))

@@ -15,6 +15,16 @@ process.on('uncaughtException', function (err) {
   console.log(err);
 });
 
+// Gets the user's email from their username
+async function getEmail (username) {
+  const emailResult = await sbd.query(`SELECT Email
+                                        FROM UserAccount 
+                                        WHERE Username = $1
+                                        LIMIT 1`, [username]);
+  if (emailResult.rows.length === 0) return null
+  return emailResult.rows[0].email
+}
+
 //MONGO
     //CONTENT
   async function getContent (ContentID, proj){
@@ -119,7 +129,7 @@ process.on('uncaughtException', function (err) {
 
     if (criticalError) return
 
-    res.status(200).send(result.insertedId);
+    res.status(201).send(result.insertedId);
   });
 
   //api/browseContent?page={page}&count={count}&sortBy={sortBy}&tags={tags}&searchString={searchString}
@@ -204,16 +214,12 @@ process.on('uncaughtException', function (err) {
     const username = req.params.Username;
 
     // Get email
-    const emailResult = await sbd.query(`SELECT Email
-                                          FROM UserAccount 
-                                          WHERE Username = $1
-                                          LIMIT 1`, [username]);
-    if (emailResult.rows.length === 0) res.status(404).send('User not found');
-    const email = emailResult.rows[0].email
+    const email = await getEmail (username)
+    if (!email) return res.status(404).send('User not found');
 
     const collection = mdb.collection('Content');
     const count = await collection.countDocuments({AuthorEmail: email})
-    if (count === undefined || count === null) res.status(404).send('User not found');
+    if (count === undefined || count === null) return res.status(404).send('User not found');
 
     res.status(200).send({count: count})
   })
@@ -240,6 +246,24 @@ process.on('uncaughtException', function (err) {
     if (result.rows.length === 0) res.status(404).send('Not found');
     else res.status(200).send(result.rows[0]);
   });
+
+  router.post('/rate/:ContentID', authenticateToken, async (req, res) => {
+    try {
+      const contentID = req.params.ContentID
+      const doc = req.body;
+      const username = doc.username
+      const rating = doc.rating
+      const email = await getEmail (username)
+      if (!email || !username) return res.status(404).send('User not found');
+
+      // Attempt to enter rating
+      const result = await sbd.query(`INSERT INTO Rating (UserEmail, ContentID, RatingType) VALUES ($1, $2, $3) RETURNING *`,[email, contentID, rating]);
+      res.status(201).json(result.rows[0])
+    } catch (error) {
+      console.error('Error in /rate/:ContentID', error);
+      res.status(500).send('Server error');
+    }
+  })
   
     //COMMENT 
   //api/comments/{ContentID}?page={page}&count={count}
