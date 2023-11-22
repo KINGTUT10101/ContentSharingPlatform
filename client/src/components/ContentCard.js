@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Typography, Paper, Box } from '@mui/material';
+import { Typography, Paper, Box, Avatar } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 import RatingBar from "./RatingBar"
 import { Link } from 'react-router-dom'
@@ -41,11 +41,17 @@ function ContentCard ({ ContentID }) {
             }
           }}>
           <div style={{display: "flex", justifyContent: "center"}}>
-            <img
-              src="https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
-              alt="Content Thumbnail"
-              style={{width: "100%", height: "9rem", transition: 'opacity 0.3s'}}
-            />
+            <Avatar
+              src={`/media/thumbnails/${ContentID}.png`}
+              variant="square"
+              style={{width: "100%", height: "100%"}}
+            >
+              <Avatar 
+                src={`/media/thumbnails/default.png`}
+                variant="square"
+                style={{width: "100%", height: "100%"}}
+              />
+            </Avatar>
           </div>
 
           <Box paddingX={1}>

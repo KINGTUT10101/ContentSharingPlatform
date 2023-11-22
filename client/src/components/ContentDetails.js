@@ -8,9 +8,6 @@ import { Link } from 'react-router-dom'
 import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
 
-// TEMP
-const tempLink = "https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
-
 /**
  * @module Components
  */
@@ -38,6 +35,13 @@ function ContentDetails ({ ContentID }) {
   const day = timestampDate.getDate();
   const year = timestampDate.getFullYear();
 
+  function handleDownload () {
+    const linkPrefix = "http://localhost:5000" // TEMP: will need to be changed when in prod
+    const link = `${linkPrefix}/media/contentData/${ContentID}.slf`
+    const filename = `${contentData.Title.replace(/\s/g, '')}.slf` // Spaces are removed from filename
+    saveAs(link, filename)
+  }
+
   return (
     <div style={{overflow: "hidden"}}>
       <Paper elevation={20}>
@@ -59,12 +63,18 @@ function ContentDetails ({ ContentID }) {
             justifyContent: "center"
           }}>
             <Avatar
-              src="https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+              src={`/media/thumbnails/${ContentID}.png`}
               variant="square"
               style={{width: "100%", height: "100%"}}
-            />
+            >
+              <Avatar 
+                src={`/media/thumbnails/default.png`}
+                variant="square"
+                style={{width: "100%", height: "100%"}}
+              />
+            </Avatar>
             <RatingBar fontSize="1.5rem" rating={contentData.avgRat * 100} />
-            <Button variant="contained" onClick={()=>saveAs(tempLink, 'test.jpg')} style={{width: "75%"}}>
+            <Button variant="contained" onClick={handleDownload} style={{width: "75%"}}>
               <DownloadIcon />
               <Typography align="left" variant="subtitle1" paddingX={1}>
                 {contentData.Downloads.toLocaleString ()}
