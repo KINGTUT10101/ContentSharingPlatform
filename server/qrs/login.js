@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken';
-import bodyParser from 'body-parser';
 import express from "express";
 import sbd from "../db/sqlConn.js";
-import mdb from "../db/mongoConn.js";
-import { ObjectId } from "mongodb";
 
 const secretKey = 'secretkey' // This should probably be placed in an ENV file if this were in prod
 
@@ -30,7 +27,7 @@ function authenticateToken(req, res, next) {
 // This will need huge security imrprovements if this is going to run in prod
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  
+
   // Get password from database
   const result = await sbd.query(`SELECT Password
                                   FROM UserAccount 
