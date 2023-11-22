@@ -1,4 +1,4 @@
-import { useParams, useSearchParams, setSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import axios from "axios";
 import React from "react";
 import { Pagination, Typography, Button, Container } from "@mui/material"
@@ -18,7 +18,7 @@ function ContentPage() {
   let { ContentID } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = React.useState(Number (searchParams.get('page')) ?? 1)
-  if (page < 1) page = 1
+  if (page === undefined || page < 1) setPage (1)
 
   const [commentDataArr, setCommentDataArr] = React.useState(null);
   const [commentCount, setCommentCount] = React.useState(null);
