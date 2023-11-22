@@ -27,10 +27,12 @@ function Login() {
         if (token) {
             // Store the token securely (e.g., in localStorage)
             localStorage.setItem('token', token)
+            localStorage.setItem('username', username)
             navigate(`/profile/${username}`)
         }
     } catch (error) {
         alert ('Login failed: Please check your login info')
+        alert (error)
     }
   }
 

@@ -5,6 +5,7 @@ import { ObjectId } from "mongodb";
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import authenticateToken from "../authenticateToken.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -62,8 +63,14 @@ process.on('uncaughtException', function (err) {
     else res.status(200).send(result);
   });
 
+  router.post('/pictest', authenticateToken, async (req, res) => {
+    let doc = req.body;
+  })
+
   // Uploads a piece of content to localstorage and the database
-  router.post('/contentUpload', async (req, res) => {  
+  // Ideally, this should probably use formdata or a dedicated service for uploading files
+  // It also needs better error handling so the document is removed if a problem occurs
+  router.post('/contentUpload', authenticateToken, async (req, res) => { 
     //get JSON doc
     let doc = req.body;
     // Add remaining data
@@ -73,25 +80,49 @@ process.on('uncaughtException', function (err) {
     doc.Tags = doc.Tags ?? []
     const fileData = doc.FileData;
     delete doc.FileData;
+    const thumbnailData = doc.ThumbnailData;
+    delete doc.ThumbnailData;
 
     // Upload document
+    let criticalError = false
     let collection = mdb.collection('Content');
     let result = await collection.insertOne(doc);
     if(!result) {
+      error = true
       res.status(404).send('Upload Error');
       return
     }
+
+    if (criticalError) return
     
     // Upload filedata
-    const filePath = path.join(__dirname, "..", 'media', 'mapData', `${result.insertedId}.slf`)
-    const fileBuffer = Buffer.from(fileData, 'base64')
-    fs.writeFile(filePath, fileBuffer, (err)=>{
+    const fileDataPath = path.join(__dirname, "..", 'media', 'contentData', `${result.insertedId}.slf`)
+    const fileDataBuffer = Buffer.from(fileData, 'base64')
+    fs.writeFile(fileDataPath, fileDataBuffer, (err)=>{
       if (err) {
+        criticalError = true
         console.error("Error saving file:", err)
         res.status(500).json('Error saving file')
         collection.deleteOne ({"_id": result.insertedId})
       }
     });
+
+    if (criticalError) return
+
+    // Upload thumbnail
+    const thumbnailDataPath = path.join(__dirname, "..", 'media', 'thumbnails', `${result.insertedId}.png`)
+    const thumbnailDataBuffer = Buffer.from(thumbnailData, 'base64')
+    fs.writeFile(thumbnailDataPath, thumbnailDataBuffer, (err)=>{
+      if (err) {
+        criticalError = true
+        console.error("Error saving thumbnail:", err)
+        res.status(500).json('Error saving thumbnail')
+        collection.deleteOne ({"_id": result.insertedId})
+      }
+    });
+
+    if (criticalError) return
+
     res.status(200).send(result.insertedId);
   });
 
@@ -147,10 +178,20 @@ process.on('uncaughtException', function (err) {
 
 //SQL
     //USER
-  //add profile pic
+  // Gets all the user's profile details
   router.get('/fullprofile/:Username', async (req, res) => {
     const username = req.params.Username;
     const result = await sbd.query(`SELECT Email, Username, AccountType, CreationDate, AccountStatus, Bio 
+                                    FROM UserAccount 
+                                    WHERE Username = $1`, [username]);
+    if (result.rows.length === 0) res.status(404).send('Not found');
+    else res.status(200).send(result.rows[0]);
+  });
+
+  // Gets the user's email from their username. A temporary solution
+  router.get('/getEmail/:Username', authenticateToken, async (req, res) => {
+    const username = req.params.Username;
+    const result = await sbd.query(`SELECT Email
                                     FROM UserAccount 
                                     WHERE Username = $1`, [username]);
     if (result.rows.length === 0) res.status(404).send('Not found');

@@ -1,27 +1,14 @@
 import jwt from 'jsonwebtoken';
 import express from "express";
 import sbd from "../db/sqlConn.js";
-
-const secretKey = 'secretkey' // This should probably be placed in an ENV file if this were in prod
+import authenticateToken from "../authenticateToken.js"
+import secretKey from "../secretKey.js"
 
 const router = express.Router();
 
 process.on('uncaughtException', function (err) {
   console.log(err);
 });
-
-function authenticateToken(req, res, next) {
-  const token = req.headers.authorization;
-
-  if (!token) return res.status(401).send('Unauthorized')
-
-  jwt.verify(token, secretKey, (err, user) => {
-      if (err) return res.status(403).send('Forbidden')
-
-      req.user = user;
-      next();
-  });
-}
 
 //Basic login
 // This will need huge security imrprovements if this is going to run in prod

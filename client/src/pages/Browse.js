@@ -37,7 +37,7 @@ function Browse() {
     axios.get(urlString).then((response) => {
       setContentIDArr(response.data);
     });
-  }, [searchParams]);
+  }, [searchParams, searchString, tags]);
   if (!contentIDArr) return null
 
   function onSubmit () {
