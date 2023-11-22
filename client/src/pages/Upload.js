@@ -57,7 +57,7 @@ function Upload() {
         ContentType: "map",
         Title: title,
         Description: description,
-        Tags: tags.replace(/\s/g, '').split(','),
+        Tags: tags != '' && tags.replace(/\s/g, '').split(',') || [],
         FileData: await fileToBase64 (contentData),
         ThumbnailData: await fileToBase64 (thumbnailData)
       },

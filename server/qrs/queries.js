@@ -63,10 +63,6 @@ process.on('uncaughtException', function (err) {
     else res.status(200).send(result);
   });
 
-  router.post('/pictest', authenticateToken, async (req, res) => {
-    let doc = req.body;
-  })
-
   // Uploads a piece of content to localstorage and the database
   // Ideally, this should probably use formdata or a dedicated service for uploading files
   // It also needs better error handling so the document is removed if a problem occurs
@@ -173,7 +169,54 @@ process.on('uncaughtException', function (err) {
         console.error('Error fetching content IDs:', error);
         res.status(500).send('Internal Server Error');
     }
-});
+  });
+
+  // Counts the total number of items that fit a certain search filter
+  router.get('/countContent', async (req, res) => {
+    const {tags, searchString } = req.query;
+  
+    let contentQuery = {};
+  
+    // Add tags filter
+    if (tags) {
+        const tagArray = tags.split(',').map((tag)=>{
+          return new RegExp(`^${tag}$`, 'i')
+        });
+        contentQuery.Tags = { $in: tagArray };
+    }
+  
+    // Add search string filter
+    if (searchString && searchString.trim() !== '') {
+      contentQuery.$text = { $search: searchString.replace(/\+/g, ' ') };
+    }
+  
+    try {
+        const collection = mdb.collection('Content');
+        const count = await collection.countDocuments(contentQuery)
+        res.json({count: count})
+    } catch (error) {
+        console.error('Error fetching content IDs:', error);
+        res.status(500).send('Internal Server Error');
+    }
+  });
+
+  router.get('/countProfileContent/:Username', async (req, res) => {
+    const username = req.params.Username;
+
+    // Get email
+    const emailResult = await sbd.query(`SELECT Email
+                                          FROM UserAccount 
+                                          WHERE Username = $1
+                                          LIMIT 1`, [username]);
+    if (emailResult.rows.length === 0) res.status(404).send('User not found');
+    const email = emailResult.rows[0].email
+
+    const collection = mdb.collection('Content');
+    const count = await collection.countDocuments({AuthorEmail: email})
+    if (count === undefined || count === null) res.status(404).send('User not found');
+
+    res.status(200).send({count: count})
+  })
 
 
 //SQL

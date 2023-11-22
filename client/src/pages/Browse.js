@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useSearchParams } from 'react-router-dom';
 import ContentCard from "../components/ContentCard"
-import { Grid, TextField, Button, Tooltip, MenuItem } from "@mui/material"
+import { Grid, TextField, Button, Tooltip, MenuItem, Pagination } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
 
 const sortOptions = [
@@ -27,18 +27,28 @@ function Browse() {
   const [searchString, setSearchString] = React.useState(searchParams.get('searchString') ?? "")
 
   const [contentIDArr, setContentIDArr] = React.useState(null);
+  const [contentCount, setContentCount] = React.useState(null);
   React.useEffect(() => {
-    let urlString = `/api/browseContent?page=${searchParams.get('page')}&count=${cardsPerPage}&sortBy=${searchParams.get('sortBy')}`
-    if (tags !== '')
-      urlString += `&tags=${searchParams.get("tags")}`
-    if (searchString !== '')
-      urlString += `&searchString=${searchParams.get("searchString")}`
-    
-    axios.get(urlString).then((response) => {
+    let pageString = `/api/browseContent?page=${searchParams.get('page')}&count=${cardsPerPage}&sortBy=${searchParams.get('sortBy')}`
+    let countString = `/api/countContent?`
+    if (tags !== '') {
+      pageString += `&tags=${searchParams.get("tags")}`
+      countString += `&tags=${searchParams.get("tags")}`
+    }
+    if (searchString !== '') {
+      pageString += `&searchString=${searchParams.get("searchString")}`
+      countString += `&searchString=${searchParams.get("searchString")}`
+    }
+
+    axios.get(pageString).then((response) => {
       setContentIDArr(response.data);
     });
+
+    axios.get(countString).then((response) => {
+      setContentCount(response.data);
+    });
   }, [searchParams, searchString, tags]);
-  if (!contentIDArr) return null
+  if (!contentIDArr || !contentCount) return null
 
   function onSubmit () {
     setSearchParams ({
@@ -94,6 +104,8 @@ function Browse() {
           </Grid>
         ))}
       </Grid>
+
+      <Pagination count={contentCount} page={page} onChange={()=>{}} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}} />
     </div>
   )
 }

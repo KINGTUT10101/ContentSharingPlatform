@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Typography, Grid, Pagination } from '@mui/material';
 import ProfileCard from "../components/ProfileCard"
 import ContentCard from "../components/ContentCard"
@@ -17,7 +17,7 @@ function Profile() {
 
   const [contentCount, setContentCount] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/api/contentCount/${Username}`).then((response) => {
+    axios.get(`/api/countProfileContent/${Username}`).then((response) => {
       setContentCount(response.data.count);
     });
   }, [Username]);
@@ -30,7 +30,7 @@ function Profile() {
         contentCount >= 1 &&
         <div>
           <Typography align="left" variant="h5" paddingY={1}>
-            {contentCount} Items
+            {contentCount} Items Uploaded
           </Typography>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center" alignItems="center" paddingBottom={2}>
             {Array.from(Array(8)).map((_, index) => (
