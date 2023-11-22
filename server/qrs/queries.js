@@ -70,6 +70,7 @@ process.on('uncaughtException', function (err) {
     doc.CreationDate = new Date()
     doc.UpdatedDate = doc.CreationDate;
     doc.Downloads = 0;
+    doc.Tags = doc.Tags ?? []
     const fileData = doc.FileData;
     delete doc.FileData;
 
@@ -115,8 +116,10 @@ process.on('uncaughtException', function (err) {
 
     // Add tags filter
     if (tags) {
-        const tagArray = tags.split(',');
-        contentQuery.tags = { $in: tagArray };
+        const tagArray = tags.split(',').map((tag)=>{
+          return new RegExp(`^${tag}$`, 'i')
+        });
+        contentQuery.Tags = { $in: tagArray };
     }
 
     // Add search string filter
