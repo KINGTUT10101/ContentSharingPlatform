@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
 import query from './qrs/queries.js';
@@ -16,12 +15,14 @@ let corsOptions = {
 // Replace __dirname with a similar variable using the new ES Modules syntax
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(bodyParser.json())
 app.use(cors());
+app.use (express.json ())
 app.use(express.urlencoded({ extended: true }));
 dotenv.config({ path: './config/config.env' });
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
-app.use(express.static('./media'));
+
+// For delivering files to the user
+app.use('/media', express.static(path.join (__dirname, "media")));
 
 // API Functions should look like this
 // Make sure they start with "/api" so they don't conflict with the frontend pages
