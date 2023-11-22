@@ -2,21 +2,21 @@
   "_id": {
     "$oid": "655a0db33961f9437c3aa268"
   },
-  "AuthorEmail": "kingtut10101@gmail.com",
-  "ContentType": "map",
-  "ContentFilepath": "./media/mapData/Classic_Map.slf",
-  "ContentFileSize": 7000,
-  "ThumbnailFilepath": "./media/mapData/thumbnails/Classic_Map.png",
-  "Title": "Classic Map",
-  "Description": "This Map is a certified classic",
-  "CreationDate": "2020-03-27T12:12:12.948Z",
-  "Downloads": 461,
-  "Tags": [
+  "authorEmail": "kingtut10101@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 7000,
+  "title": "Classic Map",
+  "description": "This Map is a certified classic",
+  "creationDate": {
+    "$date": "2020-03-27T12:12:12.948Z"
+  },
+  "downloads": 461,
+  "tags": [
     "Classic",
     "Sand",
     "Game"
   ],
-  "UpdatedDate": {
+  "updatedDate": {
     "$date": "2021-01-17T09:30:13.948Z"
   }
 },
@@ -24,21 +24,19 @@
   "_id": {
     "$oid": "655a0db33961f9437c3aa269"
   },
-  "AuthorEmail": "8pp8413@gmail.com",
-  "ContentType": "map",
-  "ContentFilepath": "./media/mapData/Magma.slf",
-  "ContentFileSize": 37000,
-  "ThumbnailFilepath": "./media/mapData/thumbnails/Classic_Map.png",
-  "Title": "Magma",
-  "Description": "Magma",
-  "CreationDate": {
+  "authorEmail": "8pp8413@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 37000,
+  "title": "Magma",
+  "description": "Magma",
+  "creationDate": {
     "$date": "2021-12-14T15:41:56.948Z"
   },
-  "Downloads": 99999,
-  "Tags": [
+  "downloads": 99999,
+  "tags": [
     "Magma"
   ],
-  "UpdatedDate": {
+  "updatedDate": {
     "$date": "2021-12-14T15:41:56.948Z"
   }
 },
@@ -46,22 +44,505 @@
   "_id": {
     "$oid": "655a0db33961f9437c3aa26a"
   },
-  "AuthorEmail": "chrismas@aol.com",
-  "ContentType": "map",
-  "ContentFilepath": "./media/mapData/File_test.slf",
-  "ContentFileSize": 3000,
-  "ThumbnailFilepath": "./media/mapData/thumbnails/Classic_Map.png",
-  "Title": "File test",
-  "Description": "don't mind this",
-  "CreationDate": {
+  "authorEmail": "chrismas@aol.com",
+  "contentType": "map",
+  "contentFileSize": 3000,
+  "title": "File test",
+  "description": "don't mind this",
+  "creationDate": {
     "$date": "2023-11-19T06:03:21.948Z"
   },
-  "Downloads": 3,
-  "Tags": [
+  "downloads": 3,
+  "tags": [
     "Test",
     "Relaxing"
   ],
-  "UpdatedDate": {
+  "updatedDate": {
     "$date": "2023-11-19T06:03:21.948Z"
   }
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddaf8"
+  },
+  "authorEmail": "MistyMusic@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 18000,
+  "title": "Clear Cannon",
+  "description": "Creator heart confused nervous cobweb actor defiant seashore.",
+  "creationDate": {
+    "$date": "2020-10-20T05:03:31.000Z"
+  },
+  "downloads": 1099,
+  "updatedDate": {
+    "$date": "2020-10-20T05:03:31.000Z"
+  },
+  "tags": [
+    "Picture",
+    "Expensive",
+    "Geese"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddaf9"
+  },
+  "authorEmail": "LongGalley@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 1000,
+  "title": "Stupid Sugar",
+  "description": "Open caption powerful jellyfish magnificent worried stranger haircut.",
+  "creationDate": {
+    "$date": "2022-06-03T13:20:38.000Z"
+  },
+  "downloads": 657,
+  "updatedDate": {
+    "$date": "2022-06-03T13:20:38.000Z"
+  },
+  "tags": [
+    "Worried",
+    "Adorable"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddafa"
+  },
+  "authorEmail": "TenseGlove@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 4000,
+  "title": "Impossible Scale",
+  "description": "Jealous careful bloody haircut arithmetic fifth scale dangerous.",
+  "creationDate": {
+    "$date": "2021-08-15T23:58:17.000Z"
+  },
+  "downloads": 1974,
+  "updatedDate": {
+    "$date": "2021-08-15T23:58:17.000Z"
+  },
+  "tags": [
+    "Answer"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddafb"
+  },
+  "authorEmail": "DisturbedSheet@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 26000,
+  "title": "Mushy Beginner",
+  "description": "Stupid tired excited lumber wicked calculator friction sleepy.",
+  "creationDate": {
+    "$date": "2023-10-11T00:46:26.000Z"
+  },
+  "downloads": 2584,
+  "updatedDate": {
+    "$date": "2023-10-11T00:46:26.000Z"
+  },
+  "tags": [
+    "Linen"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddafc"
+  },
+  "authorEmail": "JollyBasketball@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 6000,
+  "title": "Determined Bushes",
+  "description": "Crowded cute hurt vacation annoyed dead cheerful apparel.",
+  "creationDate": {
+    "$date": "2021-04-19T23:26:38.000Z"
+  },
+  "downloads": 930,
+  "updatedDate": {
+    "$date": "2021-04-19T23:26:38.000Z"
+  },
+  "tags": [
+    "Awful",
+    "Expensive"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddafd"
+  },
+  "authorEmail": "FaithfulGrain@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 39000,
+  "title": "Red Cave",
+  "description": "Channel dark gifted breakfast throne police difficult heart.",
+  "creationDate": {
+    "$date": "2021-12-30T19:16:39.000Z"
+  },
+  "downloads": 1811,
+  "updatedDate": {
+    "$date": "2021-12-30T19:16:39.000Z"
+  },
+  "tags": [
+    "Fragile",
+    "Gamer"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddafe"
+  },
+  "authorEmail": "AgreeableBelieve@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 48000,
+  "title": "Thoughtless Aftermath",
+  "description": "Unsightly itchy afternoon thrill stormy volcano holiday better.",
+  "creationDate": {
+    "$date": "2022-05-01T06:44:07.000Z"
+  },
+  "downloads": 1684,
+  "updatedDate": {
+    "$date": "2022-05-01T06:44:07.000Z"
+  },
+  "tags": [
+    "Light",
+    "Baseball"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddaff"
+  },
+  "authorEmail": "PerfectDinner@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 39000,
+  "title": "Average Stream",
+  "description": "Enchanting homely bubble concerned beggar picture vivacious beef.",
+  "creationDate": {
+    "$date": "2021-07-11T05:36:39.000Z"
+  },
+  "downloads": 2581,
+  "updatedDate": {
+    "$date": "2021-07-11T05:36:39.000Z"
+  },
+  "tags": [
+    "Enthusiastic",
+    "Ashamed",
+    "Elbow"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb00"
+  },
+  "authorEmail": "GreenStation@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 27000,
+  "title": "Tired Reward",
+  "description": "Real perfect afterthought smoggy bushes clean exuberant enthusiastic.",
+  "creationDate": {
+    "$date": "2023-05-21T22:59:49.000Z"
+  },
+  "downloads": 427,
+  "updatedDate": {
+    "$date": "2023-05-21T22:59:49.000Z"
+  },
+  "tags": [
+    "Awful",
+    "Thread",
+    "Geese"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb01"
+  },
+  "authorEmail": "GoodMountain@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 12000,
+  "title": "Powerful Plane",
+  "description": "Red naughty lettuce hope splendid beautiful lamp wicked.",
+  "creationDate": {
+    "$date": "2021-04-05T20:32:54.000Z"
+  },
+  "downloads": 3114,
+  "updatedDate": {
+    "$date": "2021-04-05T20:32:54.000Z"
+  },
+  "tags": [
+    "Worried"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb02"
+  },
+  "authorEmail": "MistyMusic@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 46000,
+  "title": "Blushing Grain",
+  "description": "Sore mushy anxious cent temper territory coach veil.",
+  "creationDate": {
+    "$date": "2022-01-05T03:09:55.000Z"
+  },
+  "downloads": 3868,
+  "updatedDate": {
+    "$date": "2022-01-05T03:09:55.000Z"
+  },
+  "tags": [
+    "Worried",
+    "Successful"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb03"
+  },
+  "authorEmail": "MistyMusic@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 8000,
+  "title": "Powerful Cave",
+  "description": "Odd worrisome quicksand fair apparel lively passenger gorgeous.",
+  "creationDate": {
+    "$date": "2023-03-28T04:54:55.000Z"
+  },
+  "downloads": 4113,
+  "updatedDate": {
+    "$date": "2023-03-28T04:54:55.000Z"
+  },
+  "tags": [
+    "Scarecrow",
+    "Route",
+    "Rainstorm"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb04"
+  },
+  "authorEmail": "GreenStation@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 10000,
+  "title": "Gleaming Reward",
+  "description": "Face long red arithmetic cattle volleyball nasty angry.",
+  "creationDate": {
+    "$date": "2023-04-14T03:53:59.000Z"
+  },
+  "downloads": 1517,
+  "updatedDate": {
+    "$date": "2023-04-14T03:53:59.000Z"
+  },
+  "tags": [
+    "Honey",
+    "Thread"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb05"
+  },
+  "authorEmail": "PanickyDemon@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 23000,
+  "title": "Enthusiastic Battle",
+  "description": "Popcorn afternoon cloudy crate street stranger branch bewildered.",
+  "creationDate": {
+    "$date": "2021-06-02T13:38:34.000Z"
+  },
+  "downloads": 2585,
+  "updatedDate": {
+    "$date": "2021-06-02T13:38:34.000Z"
+  },
+  "tags": [
+    "Picture",
+    "Creator"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb06"
+  },
+  "authorEmail": "AnxiousAppliance@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 44000,
+  "title": "Unsightly Thread",
+  "description": "Brush afternoon playground pocket blue month cellar defiant.",
+  "creationDate": {
+    "$date": "2020-09-27T15:04:43.000Z"
+  },
+  "downloads": 1456,
+  "updatedDate": {
+    "$date": "2023-08-05T16:36:04.000Z"
+  },
+  "tags": [
+    "Light",
+    "Pear"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb07"
+  },
+  "authorEmail": "UnsightlyGate@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 28000,
+  "title": "Successful Dinner",
+  "description": "Bad plastic energetic cable crazy bubble eager naughty.",
+  "creationDate": {
+    "$date": "2022-01-18T14:53:17.000Z"
+  },
+  "downloads": 4372,
+  "updatedDate": {
+    "$date": "2022-01-18T14:53:17.000Z"
+  },
+  "tags": [
+    "Worried",
+    "Baseball",
+    "Agreeable"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb08"
+  },
+  "authorEmail": "TroubledBoat@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 37000,
+  "title": "Condemned Appliance",
+  "description": "Quaint crate circle weather twig green tame scale.",
+  "creationDate": {
+    "$date": "2020-09-19T18:54:16.000Z"
+  },
+  "downloads": 1655,
+  "updatedDate": {
+    "$date": "2020-09-19T18:54:16.000Z"
+  },
+  "tags": [
+    "Awful"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb09"
+  },
+  "authorEmail": "FrightenedLinen@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 44000,
+  "title": "Spotless Arithmetic",
+  "description": "Seashore precious defiant prickly patch lovely quilt creator.",
+  "creationDate": {
+    "$date": "2020-06-04T02:34:02.000Z"
+  },
+  "downloads": 2769,
+  "updatedDate": {
+    "$date": "2020-06-04T02:34:02.000Z"
+  },
+  "tags": [
+    "Linen",
+    "Baseball"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb0a"
+  },
+  "authorEmail": "ExcitedBeast@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 35000,
+  "title": "Clever Throat",
+  "description": "Nervous defiant delightful ashamed pleasure encouraging gamer toothpaste.",
+  "creationDate": {
+    "$date": "2022-10-07T11:53:59.000Z"
+  },
+  "downloads": 1552,
+  "updatedDate": {
+    "$date": "2022-10-07T11:53:59.000Z"
+  },
+  "tags": [
+    "Picture"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb0b"
+  },
+  "authorEmail": "DeadHot@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 4000,
+  "title": "Eager Breakfast",
+  "description": "Basket cabbage lazy money action jellyfish icicle friction.",
+  "creationDate": {
+    "$date": "2021-02-01T21:33:04.000Z"
+  },
+  "downloads": 3054,
+  "updatedDate": {
+    "$date": "2023-05-13T09:53:06.000Z"
+  },
+  "tags": [
+    "Texture",
+    "Pear"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb0c"
+  },
+  "authorEmail": "SplendidHeart@gmail.com",
+  "contentType": "map",
+  "contentFileSize": 2000,
+  "title": "Annoyed Lace",
+  "description": "Caption bomb gifted selfish puzzled laborer bored quilt.",
+  "creationDate": {
+    "$date": "2021-08-19T22:01:47.000Z"
+  },
+  "downloads": 515,
+  "updatedDate": {
+    "$date": "2021-08-19T22:01:47.000Z"
+  },
+  "tags": [
+    "Bewildered",
+    "Precious",
+    "Frail"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb0d"
+  },
+  "authorEmail": "ConfusedAppliance@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 40000,
+  "title": "Spotless Wilderness",
+  "description": "Easy healthy nice anger cheerful flock gifted average.",
+  "creationDate": {
+    "$date": "2022-07-31T09:34:32.000Z"
+  },
+  "downloads": 1254,
+  "updatedDate": {
+    "$date": "2022-07-31T09:34:32.000Z"
+  },
+  "tags": [
+    "Linen",
+    "Popcorn"
+  ]
+},
+{
+  "_id": {
+    "$oid": "655c623a759f99c923eddb0e"
+  },
+  "authorEmail": "TroubledBoat@yahoo.com",
+  "contentType": "map",
+  "contentFileSize": 19000,
+  "title": "Purple Pollution",
+  "description": "Pleasure feast believe exuberant feather action frame elated.",
+  "creationDate": {
+    "$date": "2020-09-28T08:45:30.000Z"
+  },
+  "downloads": 1099,
+  "updatedDate": {
+    "$date": "2020-09-28T08:45:30.000Z"
+  },
+  "tags": [
+    "Enthusiastic",
+    "Pear",
+    "Faucet"
+  ]
 }]
