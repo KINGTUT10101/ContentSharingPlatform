@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { Paper, Typography, TextField, Button } from "@mui/material"
 import { useNavigate } from "react-router-dom"
+import getToken from "../getToken"
 
 /**
  * @module Pages
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router-dom"
  * @returns {JSX.Element} A Login component.
  */
 function Login() {
+  const token = getToken()
   const [username, setUsername] = React.useState ('')
   const [password, setPassword] = React.useState ('')
   const navigate = useNavigate()
@@ -36,22 +38,40 @@ function Login() {
     }
   }
 
-  return (
-    <div style={{overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"}}>
-      <Paper elevation={20} style={{width: "25rem", padding: "1.5rem"}}>
-        <Typography align="center" variant="h5" paddingBottom={1}>
-          Login
-        </Typography>
-        <TextField fullWidth label="Username" id="username" margin="normal" autoFocus value={username} onChange={(event)=>setUsername(event.target.value)} />
-        <TextField fullWidth label="Password" id="password" margin="normal" type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
-        <div style={{marginTop: "0.8rem", display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <Button variant="contained" onClick={handleLogin}>
+  if (!token) {
+    return (
+      <div style={{overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <Paper elevation={20} style={{width: "25rem", padding: "1.5rem"}}>
+          <Typography align="center" variant="h5" paddingBottom={1}>
             Login
+          </Typography>
+          <TextField fullWidth label="Username" id="username" margin="normal" autoFocus value={username} onChange={(event)=>setUsername(event.target.value)} />
+          <TextField fullWidth label="Password" id="password" margin="normal" type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
+          <div style={{marginTop: "0.8rem", display: "flex", alignItems: "center", justifyContent: "center"}}>
+            <Button variant="contained" onClick={handleLogin}>
+              Login
+            </Button>
+          </div>
+        </Paper>
+      </div>
+    )
+    }
+    else {
+      return (
+        <div style={{overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center"}}>
+          <Button
+            variant="contained"
+            onClick={()=>{
+              localStorage.removeItem ("token")
+              localStorage.removeItem ("username")
+              navigate(`/login`)
+            }}
+          >
+            Log out
           </Button>
         </div>
-      </Paper>
-    </div>
-  )
+      )
+    }
 }
 
 export default Login

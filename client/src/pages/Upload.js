@@ -22,6 +22,7 @@ function Upload() {
   const [tags, setTags] = React.useState ('')
 
   if (!token || !username) {
+    alert ("Please log in")
     return <Navigate to="/login" />
   }
 

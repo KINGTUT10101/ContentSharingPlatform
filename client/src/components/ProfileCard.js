@@ -55,7 +55,7 @@ function ProfileCard ({ Username }) {
               variant="square"
               style={{width: "100%", height: "100%"}}
             />
-            <RatingBar fontSize="1.5rem" />
+            {/* <RatingBar fontSize="1.5rem" /> */}
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
               Member since: {day} {month} {year}
             </Typography>

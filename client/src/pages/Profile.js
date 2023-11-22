@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Typography, Grid, Pagination } from '@mui/material';
 import ProfileCard from "../components/ProfileCard"
 import ContentCard from "../components/ContentCard"
@@ -39,7 +39,7 @@ function Profile() {
               </Grid>
             ))}
           </Grid>
-          <Pagination count={10} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center"}} />
+          {/* <Pagination count={10} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center"}} /> */}
         </div>
       }
     </div>
