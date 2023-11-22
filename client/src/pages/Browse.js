@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useSearchParams } from 'react-router-dom';
 import ContentCard from "../components/ContentCard"
-import { Grid, TextField, Button, Tooltip, MenuItem, Pagination } from "@mui/material"
+import { Grid, TextField, Button, Tooltip, MenuItem, Pagination, Typography } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
 
 const sortOptions = [
@@ -29,7 +29,7 @@ function Browse() {
   const [contentIDArr, setContentIDArr] = React.useState(null);
   const [contentCount, setContentCount] = React.useState(null);
   React.useEffect(() => {
-    let pageString = `/api/browseContent?page=${searchParams.get('page')}&count=${cardsPerPage}&sortBy=${searchParams.get('sortBy')}`
+    let pageString = `/api/browseContent?page=${searchParams.get('page')}&count=${cardsPerPage}&sortBy=${searchParams.get('sortBy') ?? sortOptions[0]}`
     let countString = `/api/countContent?`
     if (tags !== '') {
       pageString += `&tags=${searchParams.get("tags")}`
@@ -45,18 +45,25 @@ function Browse() {
     });
 
     axios.get(countString).then((response) => {
-      setContentCount(response.data);
+      setContentCount(response.data.count);
     });
   }, [searchParams, searchString, tags]);
   if (!contentIDArr || !contentCount) return null
 
   function onSubmit () {
     setSearchParams ({
-      page: page,
+      page: 1,
       sortBy: sortBy, 
       tags: tags.replace(/\s/g, ''),
       searchString: searchString.replace(/\s/g, '+')
     })
+    setPage (1)
+  }
+
+  function onPageChange (event, value) {
+    setSearchParams ({page: value})
+    setPage (value)
+    window.scrollTo(0, 0)
   }
 
   return (
@@ -97,6 +104,10 @@ function Browse() {
         </Button>
       </div>
 
+      <Typography align="center" variant="h5" paddingY={1}>
+        {contentCount} Items
+      </Typography>
+
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 16 }} justifyContent="center" alignItems="center">
         {contentIDArr.map((item) => (
           <Grid item xs={2} sm={3} md={4}>
@@ -105,7 +116,7 @@ function Browse() {
         ))}
       </Grid>
 
-      <Pagination count={contentCount} page={page} onChange={()=>{}} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}} />
+      <Pagination count={Math.ceil (contentCount / cardsPerPage)} page={page} onChange={onPageChange} variant="outlined" shape="rounded" style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}} />
     </div>
   )
 }
