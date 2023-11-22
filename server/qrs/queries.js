@@ -264,6 +264,25 @@ async function getEmail (username) {
       res.status(500).send('Server error');
     }
   })
+
+  router.post('/newComment/:ContentID', authenticateToken, async (req, res) => {
+    try {
+      const contentID = req.params.ContentID
+      const doc = req.body;
+      const username = doc.username
+      const text = doc.text
+      const email = await getEmail (username)
+      if (!email || !username) return res.status(404).send('User not found');
+      if (!text) return res.status(404).send('Cannot leave a blank comment');
+
+      // Attempt to enter comment
+      const result = await sbd.query(`INSERT INTO Comment (UserEmail, ContentID, CommentText, CreationDate) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *`,[email, contentID, text]);
+      res.status(201).json(result.rows[0])
+    } catch (error) {
+      console.error('Error in /newComment/:ContentID', error);
+      res.status(500).send('Server error');
+    }
+  })
   
     //COMMENT 
   //api/comments/{ContentID}?page={page}&count={count}
