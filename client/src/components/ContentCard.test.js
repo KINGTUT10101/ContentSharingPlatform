@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
-import { MemoryRouter } from 'react-router-dom';  // Import MemoryRouter
+import { MemoryRouter } from 'react-router-dom';
 import ContentCard from './ContentCard';
 
 jest.mock('axios')
