@@ -1,9 +1,9 @@
 import axios from "axios";
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { Typography, Grid, Pagination } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 import ProfileCard from "../components/ProfileCard"
-import ContentCard from "../components/ContentCard"
+// import ContentCard from "../components/ContentCard"
 
 /**
  * @module Pages

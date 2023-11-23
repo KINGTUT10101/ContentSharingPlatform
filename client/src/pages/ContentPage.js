@@ -7,7 +7,6 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ContentDetails from "../components/ContentDetails"
 import Comment from "../components/Comment"
-import ArrowCircleDown from '@mui/icons-material/ArrowCircleDown';
 import getToken from "../getToken"
 
 const commentsPerPage = 20

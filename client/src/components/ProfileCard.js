@@ -3,7 +3,6 @@ import React from "react";
 import { Typography, Paper, Avatar, Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
-import RatingBar from "./RatingBar"
 
 /**
  * @module Components
