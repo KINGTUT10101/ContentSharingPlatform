@@ -6,16 +6,15 @@ import ProfileCard from "./ProfileCard";
 // Mock axios
 jest.mock('axios');
 
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const timestampDate = new Date ()
+const month = timestampDate.toLocaleString('default', { month: 'long' });
+const day = timestampDate.getDate();
+const year = timestampDate.getFullYear();
 
 const mockProfileData = {
-  Username: 'testuser',
-  Bio: 'This is a test bio',
-  CreationDate: {
-    day: 1,
-    month: 1,
-    year: 2022,
-  },
+  username: 'testuser',
+  bio: 'This is a test bio',
+  creationdate: timestampDate.toISOString ()
 }
 
 describe('ProfileCard Component', () => {
@@ -27,11 +26,11 @@ describe('ProfileCard Component', () => {
     // Wait for data fetching to complete
     await waitFor(() => {
       // Ensure that the important data is rendered after fetching
-      const usernameElement = screen.getByText('testuser')
+      const usernameElement = screen.getByText(mockProfileData.username)
       expect(usernameElement).toBeInTheDocument()
     })
     const bioElement = screen.getByText('This is a test bio')
     expect(bioElement).toBeInTheDocument()
-    expect(screen.getByText(`Member since: ${mockProfileData.CreationDate.day} ${monthNames[mockProfileData.CreationDate.month - 1]} ${mockProfileData.CreationDate.year}`)).toBeInTheDocument()
+    expect(screen.getByText(`Member since: ${day} ${month} ${year}`)).toBeInTheDocument()
   })
 })

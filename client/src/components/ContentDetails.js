@@ -1,12 +1,12 @@
 import axios from "axios";
 import React from "react";
+import { saveAs } from 'file-saver';
 import { Typography, Paper, Box, Avatar, Button, Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
-
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
  * @module Components
@@ -24,11 +24,23 @@ function ContentDetails ({ ContentID }) {
 
   const [contentData, setContentData] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/api/content/${ContentID}`).then((response) => {
+    axios.get(`/api/contentDetails/${ContentID}`).then((response) => {
       setContentData(response.data);
     });
   }, [ContentID]);
   if (!contentData) return null
+
+  const timestampDate = new Date (contentData.UpdatedDate)
+  const month = timestampDate.toLocaleString('default', { month: 'long' });
+  const day = timestampDate.getDate();
+  const year = timestampDate.getFullYear();
+
+  function handleDownload () {
+    const linkPrefix = "http://localhost:5000" // TEMP: will need to be changed when in prod
+    const link = `${linkPrefix}/media/contentData/${ContentID}.slf`
+    const filename = `${contentData.Title.replace(/\s/g, '')}.slf` // Spaces are removed from filename
+    saveAs(link, filename)
+  }
 
   return (
     <div style={{overflow: "hidden"}}>
@@ -51,12 +63,18 @@ function ContentDetails ({ ContentID }) {
             justifyContent: "center"
           }}>
             <Avatar
-              src="https://steamuserimages-a.akamaihd.net/ugc/1844802808260084320/9404847D01148169F06C6AB168A480C12375B55D/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
+              src={`/media/thumbnails/${ContentID}.png`}
               variant="square"
               style={{width: "100%", height: "100%"}}
-            />
-            <RatingBar fontSize="1.5rem" />
-            <Button variant="contained" style={{width: "75%"}}>
+            >
+              <Avatar 
+                src={`/media/thumbnails/default.png`}
+                variant="square"
+                style={{width: "100%", height: "100%"}}
+              />
+            </Avatar>
+            <RatingBar fontSize="1.5rem" rating={contentData.avgRat * 100} />
+            <Button variant="contained" onClick={handleDownload} style={{width: "75%"}}>
               <DownloadIcon />
               <Typography align="left" variant="subtitle1" paddingX={1}>
                 {contentData.Downloads.toLocaleString ()}
@@ -69,7 +87,7 @@ function ContentDetails ({ ContentID }) {
               {contentData.Title}
             </Typography>
             <Typography align="left" variant="subtitle2" paddingBottom={1}>
-              Last updated: {contentData.UpdatedDate.day} {monthNames[contentData.UpdatedDate.month - 1]} {contentData.UpdatedDate.year}
+              <Link to={`/profile/${contentData.username}`} style={{ textDecoration: 'none' }}>{contentData.username}</Link> - Last updated: {day} {month} {year}
             </Typography>
             <Typography align="left" variant="body1">
               {contentData.Description}

@@ -3,9 +3,6 @@ import React from "react";
 import { Typography, Paper, Avatar, Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
-import RatingBar from "./RatingBar"
-
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
  * @module Components
@@ -21,11 +18,16 @@ function ProfileCard ({ Username }) {
 
   const [profileData, setProfileData] = React.useState(null);
   React.useEffect(() => {
-    axios.get(`/api/profile/${Username}`).then((response) => {
+    axios.get(`/api/fullprofile/${Username}`).then((response) => {
       setProfileData(response.data);
     });
   }, [Username]);
   if (!profileData) return null
+
+  const timestampDate = new Date (profileData.creationdate)
+  const month = timestampDate.toLocaleString('default', { month: 'long' });
+  const day = timestampDate.getDate();
+  const year = timestampDate.getFullYear();
 
   return (
     <div style={{overflow: "hidden"}}>
@@ -52,18 +54,18 @@ function ProfileCard ({ Username }) {
               variant="square"
               style={{width: "100%", height: "100%"}}
             />
-            <RatingBar fontSize="1.5rem" />
+            {/* <RatingBar fontSize="1.5rem" /> */}
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
-              Member since: {profileData.CreationDate.day} {monthNames[profileData.CreationDate.month - 1]} {profileData.CreationDate.year}
+              Member since: {day} {month} {year}
             </Typography>
           </Grid>
 
           <Grid item xs={9}>
             <Typography align="left" variant="h4" paddingBottom={1}>
-              {profileData.Username}
+              {profileData.username}
             </Typography>
             <Typography align="left" variant="body1">
-              {profileData.Bio}
+              {profileData.bio}
             </Typography>
           </Grid>
         </Grid>

@@ -1,8 +1,6 @@
-import axios from "axios";
 import React from "react";
+import { Link } from 'react-router-dom'
 import { Typography, Paper, Avatar, Grid } from '@mui/material';
-
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 /**
  * @module Components
@@ -10,30 +8,23 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 /**
  * Shows a comment left on a piece of content
  * @param {Object} props
- * @param {string} props.CommentID // The ID of a comment on a piece of content
+ * @param {string} props.CommentData // The contents of a comment component
  * @returns {JSX.Element} A Comment component.
  */
-function Comment ({ CommentID }) {
-  const [commentData, setCommentData] = React.useState(null)
-  const [userData, setUserData] = React.useState(null)
+function Comment ({ CommentData }) {
+  const ccdTimestampDate = new Date (CommentData.ccd)
+  const ccdDate = {
+    day: ccdTimestampDate.getDate(),
+    month: ccdTimestampDate.toLocaleString('default', { month: 'long' }),
+    year: ccdTimestampDate.getFullYear()
+  }
+  const ucdTimestampDate = new Date (CommentData.ucd)
+  const ucdDate = {
+    day: ucdTimestampDate.getDate(),
+    month: ucdTimestampDate.toLocaleString('default', { month: 'long' }),
+    year: ucdTimestampDate.getFullYear()
+  }
 
-  React.useEffect(() => {
-    // Fetch the comment data
-    axios.get(`/api/comment/${CommentID}`).then((commentResponse) => {
-      setCommentData(commentResponse.data);
-      // Using the email from the comment data, fetch the user data
-      const userEmail = commentResponse.data.UserEmail;
-      axios.get(`/api/profile/short/${userEmail}`).then((userResponse) => {
-        setUserData(userResponse.data);
-      }).catch(error => {
-        console.error("Failed to fetch user data:", error);
-      });
-    }).catch(error => {
-      console.error("Failed to fetch comment data:", error);
-    });
-  }, [CommentID]);
-  if (!commentData || !userData) return null
-  
   return (
     <div style={{overflow: "hidden"}}>
       <Paper elevation={20}>
@@ -59,16 +50,16 @@ function Comment ({ CommentID }) {
               style={{width: "100%", height: "100%"}}
             />
             <Typography align="left" variant="subtitle2" paddingBottom={1} style={{fontSize: "0.8rem"}}>
-              Member since: {userData.CreationDate.day} {monthNames[userData.CreationDate.month - 1]} {userData.CreationDate.year}
+              Member since: {ucdDate.day} {ucdDate.month} {ucdDate.year}
             </Typography>
           </Grid>
 
           <Grid item xs={10}>
             <Typography align="left" variant="subtitle2" sx={{ fontWeight: 'bold', marginBottom: 0.5 }}>
-              {userData.Username} - Posted: {commentData.CreationDate.day} {monthNames[commentData.CreationDate.month - 1]} {commentData.CreationDate.year}
+            <Link to={`/profile/${CommentData.username}`} style={{ textDecoration: 'none' }}>{CommentData.username}</Link> - Posted: {ccdDate.day} {ccdDate.month} {ccdDate.year}
             </Typography>
             <Typography align="left" variant="body1" style={{fontSize: "0.9rem"}}>
-              {commentData.CommentText}
+              {CommentData.commenttext}
             </Typography>
           </Grid>
         </Grid>
