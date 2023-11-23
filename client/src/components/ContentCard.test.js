@@ -7,20 +7,20 @@ import ContentCard from './ContentCard';
 
 jest.mock('axios')
 
-const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const timestampDate = new Date ()
+const month = timestampDate.toLocaleString('default', { month: 'long' });
+const day = timestampDate.getDate();
+const year = timestampDate.getFullYear();
 
 const mockContentData = {
   ContentID: '1',
   Title: 'Sample Content',
-  UpdatedDate: {
-    day: 1,
-    month: 1,
-    year: 2023,
-  },
+  UpdatedDate: timestampDate.toISOString (),
   Description: 'Sample description',
   Downloads: 10000,
   Tags: ['Tag1', 'Tag2'],
-  AuthorUsername: 'Username',
+  username: 'Username',
+  avgRat: 0.5
 }
 
 describe('ContentCard Component', () => {
@@ -36,16 +36,12 @@ describe('ContentCard Component', () => {
     await waitFor(() => {
       expect(screen.getByText(mockContentData.Title)).toBeInTheDocument()
     })
-    expect(screen.getByText(mockContentData.AuthorUsername)).toBeInTheDocument()
+    expect(screen.getByText(mockContentData.username)).toBeInTheDocument()
     expect(screen.getByText(mockContentData.Tags[0])).toBeInTheDocument()
     expect(screen.getByText(mockContentData.Tags[1])).toBeInTheDocument()
     expect(screen.getByText(mockContentData.Downloads.toLocaleString())).toBeInTheDocument()
     expect(
       screen.getByText(
-        `Last Updated: ${mockContentData.UpdatedDate.day} ${
-          monthNames[mockContentData.UpdatedDate.month - 1]
-        } ${mockContentData.UpdatedDate.year}`
-      )
-    ).toBeInTheDocument()
+        `Last Updated: ${day} ${month} ${year}`)).toBeInTheDocument()
   })
 })
