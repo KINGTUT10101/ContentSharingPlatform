@@ -2,6 +2,7 @@ version: "3"
 
 services:
   client:
+    image: kingtut10101/csp-client:latest
     build:
       context: ./client
     ports:
@@ -12,6 +13,7 @@ services:
       - webappnetwork
 
   server:
+    image: kingtut10101/csp-server:latest
     build:
       context: ./server
     ports:
