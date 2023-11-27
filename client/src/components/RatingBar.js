@@ -3,10 +3,8 @@ import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
 /**
- * @module Components
- */
-/**
  * Displays a rating/review bar where the negative side is red and the positive side is green
+ * @category Components
  * @param {Object} props
  * @param {string} props.fontSize The size of the icons on both sides of the progress bar
  * @param {string} props.rating The value represented by the rating bar. Can range between 0 to 100 (inclusive)

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import secretKey from "./secretKey.js"
 
+// Authenticates the token before performing an action in the backend
 export default function authenticateToken(req, res, next) {
   const token = req.headers.authorization;
 

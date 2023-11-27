@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom"
 import getToken from "../getToken"
 
 /**
- * @module Pages
- */
-/**
  * Allows users to log into their profiles, which is required to upload content and leave comments
+ * @category Pages
  * @returns {JSX.Element} A Login component.
  */
 function Login() {

@@ -15,18 +15,29 @@ process.on('uncaughtException', function (err) {
   console.log(err);
 });
 
-// Gets the user's email from their username
-async function getEmail (username) {
-  const emailResult = await sbd.query(`SELECT Email
-                                        FROM UserAccount 
-                                        WHERE Username = $1
-                                        LIMIT 1`, [username]);
-  if (emailResult.rows.length === 0) return null
-  return emailResult.rows[0].email
-}
+// HELPER FUNCTIONS
+  /**
+   * Gets a user's email from their username
+   * @ignore
+   * @param {*} username The user's username
+   * @returns A string containing the user's email or null if they didn't exist
+   */
+  async function getEmail (username) {
+    const emailResult = await sbd.query(`SELECT Email
+                                          FROM UserAccount 
+                                          WHERE Username = $1
+                                          LIMIT 1`, [username]);
+    if (emailResult.rows.length === 0) return null
+    return emailResult.rows[0].email
+  }
 
-//MONGO
-    //CONTENT
+  /**
+   * Gets the data for a piece of content by its ID
+   * @ignore
+   * @param {*} ContentID The ID of the piece of content stored in MongoDB
+   * @param {*} proj The attributes to project out from MongoDB
+   * @returns An object containing the content's data or -1 if the content didn't exist
+   */
   async function getContent (ContentID, proj){
     let collection = mdb.collection('Content');
 
@@ -57,7 +68,15 @@ async function getEmail (username) {
     return contentResult;
   };
 
-  //api/contentDetails/:ContentID
+//MONGO
+  /**
+   * Retrieves the data for the ContentDetails component on the frontend
+   * @function /api/contentDetails/:ContentID
+   * @category Routes
+   * @route {GET} /api/contentDetails/:ContentID
+   * @routeparam {String} :ContentID The unique ID of a piece of uploaded content
+   * @returns An object containing the content details or a string with an error message
+   */
   router.get('/contentDetails/:ContentID', async (req, res) => { 
     let proj = {projection: {_id:0, ContentType:0, ContentFileSize:0, CreationDate:0}}
     const result = await getContent(req.params.ContentID,proj);
@@ -65,7 +84,14 @@ async function getEmail (username) {
     res.status(200).send(result);
   });
 
-  //api/contentCard/:ContentID
+  /**
+   * Retrieves the data for the ContentCard component on the frontend
+   * @function /api/contentCard/:ContentID
+   * @category Routes
+   * @route {GET} /api/contentCard/:ContentID
+   * @routeparam {String} :ContentID The unique ID of a piece of uploaded content
+   * @returns An object containing the content details or a string with an error message
+   */
   router.get('/contentCard/:ContentID', async (req, res) => {
     let proj = {projection: {_id:0, ContentType:0, ContentFileSize:0, CreationDate:0, Description:0}}
     const result = await getContent(req.params.ContentID,proj);
@@ -73,9 +99,25 @@ async function getEmail (username) {
     else res.status(200).send(result);
   });
 
-  // Uploads a piece of content to localstorage and the database
-  // Ideally, this should probably use formdata or a dedicated service for uploading files
-  // It also needs better error handling so the document is removed if a problem occurs
+  /**
+   * Uploads a new piece of content to MongoDB
+   * @function /api/contentUpload
+   * @category Routes
+   * @route {POST} /api/contentUpload
+   * @authentication The user's login token from their localstorage
+   * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
+   * @headerparam {String} Authorization The local token that proves the user is signed in
+   * @bodyparam {String} AuthorEmail The email of the content's creator
+   * @bodyparam {String} ContentType The type of content being uploaded. Only "map" is supported right now
+   * @bodyparam {String} Title The title of the content
+   * @bodyparam {String} Description The description of the content
+   * @bodyparam {Array.<String>} Tags An array of tags that can be used to find this content in the browser
+   * @bodyparam {String} FileData A base64 representation of the uploaded file
+   * @bodyparam {String} ThumbnailData A base64 representation of the thumbnail photo
+   * @returns A string containing the ID of the uploaded content or an error if something went wrong
+   * @todo Ideally, this should probably use formdata or a dedicated service for uploading files
+   * @todo It also needs better error handling so the document is removed if a problem occurs or if body params are gone
+   */
   router.post('/contentUpload', authenticateToken, async (req, res) => { 
     //get JSON doc
     let doc = req.body;
@@ -132,7 +174,18 @@ async function getEmail (username) {
     res.status(201).send(result.insertedId);
   });
 
-  //api/browseContent?page={page}&count={count}&sortBy={sortBy}&tags={tags}&searchString={searchString}
+  /**
+   * Returns a page of content IDs for a given search
+   * @function /api/browseContent
+   * @category Routes
+   * @route {GET} /api/browseContent?page={page}&count={count}&sortBy={sortBy}&tags={tags}&searchString={searchString}
+   * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
+   * @queryparam {number} count The number of IDs to fetch from the database, aka, the number of items per page
+   * @queryparam {String} sortBy Determines how the resulting items will be sorted. Options include "Downloads" and "UpdatedDate"
+   * @queryparam {String} tags A series of comma-separated tags that will narrow the search
+   * @queryparam {String} searchString A series of terms that will be used in a full-text search on content titles and descriptions
+   * @returns An array of content IDs or a string containing an error message
+   */
   router.get('/browseContent', async (req, res) => {
     const { page = 1, count = 20, sortBy = 'Downloads', tags, searchString } = req.query;
 
@@ -181,7 +234,15 @@ async function getEmail (username) {
     }
   });
 
-  // Counts the total number of items that fit a certain search filter
+  /**
+   * Counts the total number of items that fit a certain search filter
+   * @function /api/countContent
+   * @category Routes
+   * @route {GET} /api/countContent?&tags={tags}&searchString={searchString}
+   * @queryparam {String} tags A series of comma-separated tags that will narrow the search
+   * @queryparam {String} searchString A series of terms that will be used in a full-text search on content titles and descriptions
+   * @returns An object containing the number of items at key count or a string containing an error message
+   */
   router.get('/countContent', async (req, res) => {
     const {tags, searchString } = req.query;
   
@@ -210,6 +271,14 @@ async function getEmail (username) {
     }
   });
 
+  /**
+   * Counts the pieces of content uploaded by a certain user
+   * @function /api/countProfileContent
+   * @category Routes
+   * @route {GET} /api/countProfileContent/:Username
+   * @routeparam {String} :Username The user's username
+   * @returns An object containing the number of items at key count or a string containing an error message
+   */
   router.get('/countProfileContent/:Username', async (req, res) => {
     const username = req.params.Username;
 
@@ -227,7 +296,14 @@ async function getEmail (username) {
 
 //SQL
     //USER
-  // Gets all the user's profile details
+  /**
+   * Retrieves the data for the ProfileCard component on the frontend
+   * @function /api/fullprofile/:Username
+   * @category Routes
+   * @route {GET} /api/fullprofile/:Username
+   * @routeparam {String} :Username The user's username
+   * @returns An object containing the profile data or a string containing an error message
+   */
   router.get('/fullprofile/:Username', async (req, res) => {
     const username = req.params.Username;
     const result = await sbd.query(`SELECT Email, Username, AccountType, CreationDate, AccountStatus, Bio 
@@ -237,7 +313,14 @@ async function getEmail (username) {
     else res.status(200).send(result.rows[0]);
   });
 
-  // Gets the user's email from their username. A temporary solution
+  /**
+   * Gets the user's email from their username. A temporary solution
+   * @function /api/getEmail/:Username
+   * @category Routes
+   * @route {GET} /api/getEmail/:Username
+   * @routeparam {String} :Username The user's username
+   * @returns An object containing the email at key email or a string containing an error message
+   */
   router.get('/getEmail/:Username', authenticateToken, async (req, res) => {
     const username = req.params.Username;
     const result = await sbd.query(`SELECT Email
@@ -247,6 +330,21 @@ async function getEmail (username) {
     else res.status(200).send(result.rows[0]);
   });
 
+  /**
+   * Posts a rating for a piece of content from a certain user
+   * @function /api/rate/:ContentID
+   * @category Routes
+   * @route {POST} /api/rate/:ContentID
+   * @authentication The user's login token from their localstorage
+   * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
+   * @headerparam {String} Authorization The local token that proves the user is signed in
+   * @routeparam {String} :ContentID The ID of a piece of content
+   * @bodyparam {String} username The username of the person leaving the rating
+   * @bodyparam {Boolean} rating True if the rating is positive or false if the rating is negative
+   * @returns The inserted row into the database or a string containing an error message
+   * @todo Give a proper message instead of returning the DB row
+   * @todo Properly check if the body params are fulfilled
+   */
   router.post('/rate/:ContentID', authenticateToken, async (req, res) => {
     try {
       const contentID = req.params.ContentID
@@ -265,6 +363,21 @@ async function getEmail (username) {
     }
   })
 
+  /**
+   * Posts a new comment of a piece of content
+   * @function /api/newComment/:ContentID
+   * @category Routes
+   * @route {POST} /api/newComment/:ContentID
+   * @authentication The user's login token from their localstorage
+   * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
+   * @headerparam {String} Authorization The local token that proves the user is signed in
+   * @routeparam {String} :ContentID The ID of a piece of content
+   * @bodyparam {String} username The username of the person leaving the rating
+   * @bodyparam {String} text The text content of the comment
+   * @returns The inserted row into the database or a string containing an error message
+   * @todo Give a proper message instead of returning the DB row
+   * @todo Properly check if the body params are fulfilled
+   */
   router.post('/newComment/:ContentID', authenticateToken, async (req, res) => {
     try {
       const contentID = req.params.ContentID
@@ -275,6 +388,8 @@ async function getEmail (username) {
       if (!email || !username) return res.status(404).send('User not found');
       if (!text) return res.status(404).send('Cannot leave a blank comment');
 
+      console.og
+
       // Attempt to enter comment
       const result = await sbd.query(`INSERT INTO Comment (UserEmail, ContentID, CommentText, CreationDate) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *`,[email, contentID, text]);
       res.status(201).json(result.rows[0])
@@ -284,8 +399,16 @@ async function getEmail (username) {
     }
   })
   
-    //COMMENT 
-  //api/comments/{ContentID}?page={page}&count={count}
+  /**
+   * Fetchs a page of comments left on a piece of content
+   * @function /api/comments/:ContentID
+   * @category Routes
+   * @route {GET} /api/comments/:ContentID?page={page}&count={count}
+   * @routeparam {String} :ContentID The ID of a piece of content
+   * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
+   * @queryparam {number} count The number of comments to fetch from the database, aka, the number of items per page
+   * @returns An array of comment data or a string containing an error message
+   */
   router.get('/comments/:ContentID', async (req, res) => {
     //Calculate where we start taking the comments + error handling
     if(!parseInt(req.query.count) || req.query.count<0) req.query.count = 20;
@@ -303,7 +426,14 @@ async function getEmail (username) {
     res.status(200).send(result.rows);
   });
 
-  //api/commentCount/{ContentID}
+  /**
+   * Gets the total number of comments left on a piece of content
+   * @function /api/commentCount/:ContentID
+   * @category Routes
+   * @route {GET} /api/commentCount/:ContentID
+   * @routeparam {String} :ContentID The ID of a piece of content
+   * @returns An object containing the number of items at key count or a string containing an error message
+   */
   router.get('/commentCount/:ContentID', async (req, res) => {
     const result = await sbd.query(`SELECT COUNT (*)
                                     FROM Comment

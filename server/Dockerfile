@@ -8,14 +8,10 @@ RUN npm install
 
 COPY . .
 
-WORKDIR /app/client
+WORKDIR /app/server
 
 RUN npm install
 
-RUN npm install react-scripts -g
-
-RUN npm run build
-
 EXPOSE 5000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "server"]

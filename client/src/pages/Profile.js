@@ -6,10 +6,8 @@ import ProfileCard from "../components/ProfileCard"
 // import ContentCard from "../components/ContentCard"
 
 /**
- * @module Pages
- */
-/**
  * Shows information about a user and the content they've uploaded
+ * @category Pages
  * @returns {JSX.Element} A Profile component.
  */
 function Profile() {

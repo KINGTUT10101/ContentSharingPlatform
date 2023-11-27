@@ -9,10 +9,8 @@ import RatingBar from "./RatingBar"
 import DownloadIcon from '@mui/icons-material/Download';
 
 /**
- * @module Components
- */
-/**
  * Shows a detailed information about a piece of content, like its full description
+ * @category Components
  * @param {Object} props
  * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentDetails component.
