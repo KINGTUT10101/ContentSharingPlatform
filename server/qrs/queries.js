@@ -71,6 +71,8 @@ process.on('uncaughtException', function (err) {
 //MONGO
   /**
    * Retrieves the data for the ContentDetails component on the frontend
+   * @function /api/contentDetails/:ContentID
+   * @category Routes
    * @route {GET} /api/contentDetails/:ContentID
    * @routeparam {String} :ContentID The unique ID of a piece of uploaded content
    * @returns An object containing the content details or a string with an error message
@@ -84,6 +86,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Retrieves the data for the ContentCard component on the frontend
+   * @function /api/contentCard/:ContentID
+   * @category Routes
    * @route {GET} /api/contentCard/:ContentID
    * @routeparam {String} :ContentID The unique ID of a piece of uploaded content
    * @returns An object containing the content details or a string with an error message
@@ -97,6 +101,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Uploads a new piece of content to MongoDB
+   * @function /api/contentUpload
+   * @category Routes
    * @route {POST} /api/contentUpload
    * @authentication The user's login token from their localstorage
    * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
@@ -170,6 +176,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Returns a page of content IDs for a given search
+   * @function /api/browseContent
+   * @category Routes
    * @route {GET} /api/browseContent?page={page}&count={count}&sortBy={sortBy}&tags={tags}&searchString={searchString}
    * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
    * @queryparam {number} count The number of IDs to fetch from the database, aka, the number of items per page
@@ -228,6 +236,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Counts the total number of items that fit a certain search filter
+   * @function /api/countContent
+   * @category Routes
    * @route {GET} /api/countContent?&tags={tags}&searchString={searchString}
    * @queryparam {String} tags A series of comma-separated tags that will narrow the search
    * @queryparam {String} searchString A series of terms that will be used in a full-text search on content titles and descriptions
@@ -263,6 +273,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Counts the pieces of content uploaded by a certain user
+   * @function /api/countProfileContent
+   * @category Routes
    * @route {GET} /api/countProfileContent/:Username
    * @routeparam {String} :Username The user's username
    * @returns An object containing the number of items at key count or a string containing an error message
@@ -286,6 +298,8 @@ process.on('uncaughtException', function (err) {
     //USER
   /**
    * Retrieves the data for the ProfileCard component on the frontend
+   * @function /api/fullprofile/:Username
+   * @category Routes
    * @route {GET} /api/fullprofile/:Username
    * @routeparam {String} :Username The user's username
    * @returns An object containing the profile data or a string containing an error message
@@ -301,6 +315,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Gets the user's email from their username. A temporary solution
+   * @function /api/getEmail/:Username
+   * @category Routes
    * @route {GET} /api/getEmail/:Username
    * @routeparam {String} :Username The user's username
    * @returns An object containing the email at key email or a string containing an error message
@@ -316,6 +332,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Posts a rating for a piece of content from a certain user
+   * @function /api/rate/:ContentID
+   * @category Routes
    * @route {POST} /api/rate/:ContentID
    * @authentication The user's login token from their localstorage
    * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
@@ -347,6 +365,8 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Posts a new comment of a piece of content
+   * @function /api/newComment/:ContentID
+   * @category Routes
    * @route {POST} /api/newComment/:ContentID
    * @authentication The user's login token from their localstorage
    * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
@@ -368,6 +388,8 @@ process.on('uncaughtException', function (err) {
       if (!email || !username) return res.status(404).send('User not found');
       if (!text) return res.status(404).send('Cannot leave a blank comment');
 
+      console.og
+
       // Attempt to enter comment
       const result = await sbd.query(`INSERT INTO Comment (UserEmail, ContentID, CommentText, CreationDate) VALUES ($1, $2, $3, CURRENT_TIMESTAMP) RETURNING *`,[email, contentID, text]);
       res.status(201).json(result.rows[0])
@@ -379,7 +401,9 @@ process.on('uncaughtException', function (err) {
   
   /**
    * Fetchs a page of comments left on a piece of content
-   * @route {GET} /api/comments/{ContentID}?page={page}&count={count}
+   * @function /api/comments/:ContentID
+   * @category Routes
+   * @route {GET} /api/comments/:ContentID?page={page}&count={count}
    * @routeparam {String} :ContentID The ID of a piece of content
    * @queryparam {number} page The page that the data is being fetched for. Offsets the result from the database
    * @queryparam {number} count The number of comments to fetch from the database, aka, the number of items per page
@@ -404,7 +428,9 @@ process.on('uncaughtException', function (err) {
 
   /**
    * Gets the total number of comments left on a piece of content
-   * @route {GET} /api/commentCount/{ContentID}
+   * @function /api/commentCount/:ContentID
+   * @category Routes
+   * @route {GET} /api/commentCount/:ContentID
    * @routeparam {String} :ContentID The ID of a piece of content
    * @returns An object containing the number of items at key count or a string containing an error message
    */

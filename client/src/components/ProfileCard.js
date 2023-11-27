@@ -5,10 +5,8 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 
 /**
- * @module Components
- */
-/**
  * Shows a user's profile data, including their name, PFP, bio, and average content rating
+ * @category Components
  * @param {Object} props
  * @param {string} props.Username A user's username
  * @returns {JSX.Element} A ProfileCard component.

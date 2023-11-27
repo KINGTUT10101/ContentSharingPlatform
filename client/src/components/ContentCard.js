@@ -6,10 +6,8 @@ import RatingBar from "./RatingBar"
 import { Link } from 'react-router-dom'
 
 /**
- * @module Components
- */
-/**
  * Displays a content's data, including the thumbnail, rating, title, author, etc
+ * @category Components
  * @param {Object} props
  * @param {string} props.ContentID // The ID of a piece of user content
  * @returns {JSX.Element} A ContentCard component.

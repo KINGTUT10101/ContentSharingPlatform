@@ -16,8 +16,8 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "better-docs": "^2.7.2",
     "concurrently": "^8.2.2",
-    "docdash": "^2.0.2",
     "eslint": "^8.53.0",
     "eslint-plugin-react": "^7.33.2",
     "jsdoc": "^4.0.2",
@@ -36,6 +36,7 @@
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "pgsql": "^1.0.0",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.33.0",
+    "taffydb": "^2.7.3"
   }
 }

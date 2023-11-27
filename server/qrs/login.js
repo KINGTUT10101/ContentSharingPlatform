@@ -12,6 +12,8 @@ process.on('uncaughtException', function (err) {
 
 /**
  * Generates an authentication token for a user if they provide correct login details
+ * @function /api/login
+ * @category Routes
  * @route {POST} /api/login
  * @authentication The user's login token from their localstorage
  * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json
@@ -22,30 +24,38 @@ process.on('uncaughtException', function (err) {
  * @todo We can't just send plaintext passwords in a real website!
  */
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  try {
+    const { username, password } = req.body;
 
-  // Get password from database
-  const result = await sbd.query(`SELECT Password
-                                  FROM UserAccount 
-                                  WHERE Username = $1
-                                  LIMIT 1`, [username]);
-  if (result.rows.length === 0) {
-    res.status(401).send('Invalid credentials')
-    return
+    // Get password from database
+    const result = await sbd.query(`SELECT Password
+                                    FROM UserAccount 
+                                    WHERE Username = $1
+                                    LIMIT 1`, [username]);
+    if (result.rows.length === 0) {
+      res.status(401).send('Invalid credentials')
+      return
+    }
+    const dbPassword = result.rows[0].password
+  
+    // Check if password matched. This is probably not very secure and should be changed
+    if (password === dbPassword) {
+        const token = jwt.sign({ username }, secretKey);
+        res.json({ token })
+    } else {
+      res.status(401).send('Invalid credentials')
+    }
   }
-  const dbPassword = result.rows[0].password
-
-  // Check if password matched. This is probably not very secure and should be changed
-  if (password === dbPassword) {
-      const token = jwt.sign({ username }, secretKey);
-      res.json({ token })
-  } else {
-    res.status(401).send('Invalid credentials')
+  catch (err) {
+    res.status(500).send(err)
+    console.log (err)
   }
 });
 
 /**
  * Used to test the token authentication system
+ * @function /api/protected
+ * @category Routes
  * @route /api/protected
  * @authentication The user's login token from their localstorage
  * @headerparam {String} Content-Type The type of data contained in the body. Should be application/json

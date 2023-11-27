@@ -12,10 +12,8 @@ import getToken from "../getToken"
 const commentsPerPage = 20
 
 /**
- * @module Pages
- */
-/**
  * Shows more detailed information about a piece of content and its comments
+ * @category Pages
  * @returns {JSX.Element} A ContentPage component.
  */
 function ContentPage() {

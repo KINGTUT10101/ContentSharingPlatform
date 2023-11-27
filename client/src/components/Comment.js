@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom'
 import { Typography, Paper, Avatar, Grid } from '@mui/material';
 
 /**
- * @module Components
- */
-/**
  * Shows a comment left on a piece of content
+ * @category Components
  * @param {Object} props
  * @param {string} props.CommentData // The contents of a comment component
  * @returns {JSX.Element} A Comment component.

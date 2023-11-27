@@ -2,10 +2,8 @@
 import { Grid, Typography } from "@mui/material"
 
 /**
- * @module Pages
- */
-/**
  * The main page of the website. Shows recent announcements and featured content
+ * @category Pages
  * @returns {JSX.Element} A Home component.
  */
 function Home() {

@@ -12,10 +12,8 @@ const sortOptions = [
 const cardsPerPage = 12
 
 /**
- * @module Pages
- */
-/**
  * Allows users to browse for content by applying tags, search terms, categories, etc
+ * @category Pages
  * @returns {JSX.Element} A Browse component.
  */
 function Browse() {
@@ -47,8 +45,10 @@ function Browse() {
     axios.get(countString).then((response) => {
       setContentCount(response.data.count);
     });
-  }, [searchParams, searchString, tags]);
-  if (!contentIDArr || !contentCount) return null
+  }, [searchParams]);
+  if (contentIDArr === null || contentCount === null) {
+    return null
+  }
 
   function onSubmit () {
     setSearchParams ({
@@ -68,7 +68,14 @@ function Browse() {
 
   return (
     <div>
-      <TextField fullWidth label="Search" id="searchTerms" margin="normal" autoFocus onChange={(event)=>setSearchString(event.target.value)} />
+      <TextField
+        fullWidth
+        label="Search"
+        id="searchTerms"
+        margin="normal"
+        autoFocus
+        onChange={(event)=>setSearchString(event.target.value)}
+      />
       <Tooltip title="Separate each tag with a comma" placement="top-start" size="small">
         <TextField
           fullWidth
