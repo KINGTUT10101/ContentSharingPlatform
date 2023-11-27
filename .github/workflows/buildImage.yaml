@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     
     steps:
       - name: Checkout Repository
@@ -27,6 +28,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: ./docker-compose.yml
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/contentsharingplatform:latest

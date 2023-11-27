@@ -1,0 +1,47 @@
+version: ""
+
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    networks:
+      - webappnetwork
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/test
+      - POSTGRES_URI=postgres://postgres:password@postgres:5432/projectEX
+    depends_on:
+      - mongo
+      - postgres
+    networks:
+      - webappnetwork
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - webappnetwork
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: projectEX
+    ports:
+      - "5432:5432"
+    networks:
+      - webappnetwork
+
+networks:
+    webappnetwork:
+        driver: bridge
