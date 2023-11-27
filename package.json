@@ -21,7 +21,9 @@
     "eslint": "^8.53.0",
     "eslint-plugin-react": "^7.33.2",
     "jsdoc": "^4.0.2",
-    "jsdoc-to-markdown": "^8.0.0"
+    "jsdoc-route-plugin": "^0.1.0",
+    "jsdoc-to-markdown": "^8.0.0",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.4",

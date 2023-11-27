@@ -6,6 +6,9 @@
   "source": {
     "include": ["client/src"]
   },
+  "plugins": [
+    "jsdoc-route-plugin"
+  ],
   "opts": {
     "template": "node_modules/docdash",
     "destination": "./docs",
