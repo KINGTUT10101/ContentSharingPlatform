@@ -6,7 +6,6 @@ CREATE TABLE UserAccount (
     AccountType VARCHAR(50) CHECK (AccountType IN ('standard', 'admin')),
     CreationDate TIMESTAMP NOT NULL,
     AccountStatus VARCHAR(50) CHECK (AccountStatus IN ('active', 'restricted', 'banned')),
-    ProfilePic VARCHAR(255),
     Bio TEXT
 );
 -- PostgreSQL Table for FeaturedContent
@@ -38,7 +37,7 @@ CREATE TABLE Rating (
     UserEmail VARCHAR(255) REFERENCES UserAccount(Email),
     ContentID VARCHAR(25) NOT NULL,
     RatingType BOOLEAN,
-    PRIMARY KEY (UserEmail, ContentID)
+    PRIMARY KEY (UserEmail, ContentID),
     CONSTRAINT unique_rating_entry UNIQUE (UserEmail, ContentID)
 );
 CREATE VIEW averageRating AS	
