@@ -26,9 +26,6 @@ Run "\copy comment(UserEmail,CommentText,CreationDate,ContentId) FROM '<path/to/
 
 Run "\copy rating FROM '<path/to/Ranking.csv>' WITH DELIMITER ',' CSV HEADER;"
 
-
-
-
 Navigate to ContentSharingPlatform/server/db/sqlConn.js
 
 Change user, host, database, password, and port to your chosen SQL database settings
@@ -44,8 +41,6 @@ Click ADD DATA > Import JSON or CSV file
 Navigate to ContentSharingPlatform/database/mockData/Content.json
 
 Click Import
-
-
 
 Navigate to ContentSharingPlatform/server/db/mongoConn.js
 
