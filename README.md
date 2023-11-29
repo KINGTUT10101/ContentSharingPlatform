@@ -6,6 +6,36 @@ This is a place for Just Another Sand Game players to share maps, mods, and more
 
 https://kingtut10101.github.io/ContentSharingPlatform/
 
+## Setup Databases and Upload Mock Data
+
+Make sure you have pgSQL and MongoDBCompass installed
+
+# SQL
+
+Connect to the SQL Shell (psql)
+Run "CREATE DATABASE <Database>;", replacing <Database> with whatever you want to name your Database
+Run "\c <Database>"
+Run "\i <path/to/PostgreSQL_Project.sql>"
+Run "\copy useraccount FROM '<path/to/ContentSharingPlatform/database/mockData/UserAcct.csv>' WITH DELIMITER ',' CSV HEADER;"
+Run "\copy comment(UserEmail,CommentText,CreationDate,ContentId) FROM '<path/to/Comment.csv>' WITH DELIMITER ',' CSV HEADER;"
+Run "\copy rating FROM '<path/to/Ranking.csv>' WITH DELIMITER ',' CSV HEADER;"
+
+Navigate to ContentSharingPlatform/server/db/sqlConn.js
+Change user, host, database, password, and port to your chosen SQL database settings
+
+# MongoDB
+
+Connect to MongoDBCompass
+Create Database and Collection titled "Content"
+Click ADD DATA > Import JSON or CSV file
+Navigate to ContentSharingPlatform/database/mockData/Content.json
+Click Import
+
+Navigate to ContentSharingPlatform/server/db/mongoConn.js
+Change "connectionString" to your chosen MongoDB connection string if needed
+edit "let db = conn.db("<Database>")"
+
+
 ## Installation
 
 Make sure [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) is installed
