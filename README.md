@@ -4,7 +4,6 @@ This is a place for Just Another Sand Game players to share maps, mods, and more
 
 ![image](https://github.com/KINGTUT10101/ContentSharingPlatform/assets/45105509/263ee045-e2d6-4a5d-ab4d-51ad3e79d488)
 ![image](https://github.com/KINGTUT10101/ContentSharingPlatform/assets/45105509/0a364dc3-a281-4fad-94ca-26c351c80daa)
-![image](https://github.com/KINGTUT10101/ContentSharingPlatform/assets/45105509/cdd0823d-e315-4501-bdfe-878f854c2c30)
 
 ## Documentation
 
